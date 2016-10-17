@@ -1,4 +1,6 @@
 # README
 
-let make something fun!!!!!okkkkkkkk
-* ...
+## Contributors
+
+Hao Zheng
+Ida Nakhostin 
