@@ -3,4 +3,5 @@
 ## Contributors
 
 Hao Zheng
-Ida Nakhostin 
+Ida Nakhostin
+Connor Hovanessian
