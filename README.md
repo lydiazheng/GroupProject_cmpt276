@@ -1,8 +1,7 @@
-# README
+# Assignment Two
+Tokimon - Rabbit like monsters, Tokimons are the champions!
 
-## Contributors
+## Access URL
 
-Hao Zheng
-Ida Nakhostin
-Connor Hovanessian
-Chen Sun
+
+## Extra Features
