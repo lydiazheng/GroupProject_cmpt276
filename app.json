@@ -1,0 +1,8 @@
+{
+  "name": "CMPT276 Fall 2016 Assignment Two",
+  "description": "Tokimon",
+  "image": "heroku/ruby",
+  "repository": "https://github.com/Ida-Nakhostin/cmpt276-assignment-two",
+  "keywords": ["ruby", "rails" ],
+  "addons": [ "heroku-postgresql" ]
+}
