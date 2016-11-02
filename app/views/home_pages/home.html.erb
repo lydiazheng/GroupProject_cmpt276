@@ -1,0 +1,16 @@
+<% provide(:title, "Home") %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) %> | Urban Hunt</title>
+  </head>
+  <body>
+    <h1>Welcome to Urban Hunt</h1>
+    <h2>
+      This is the home page for the Urban Hunt application.
+    </h2>
+
+    <%= link_to "Sign up now!", '#', class: "btn btn-lg btn-primary" %>
+    
+  </body>
+</html>
