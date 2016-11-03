@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  root 'home_pages#home'
+  get  '/about',   to: 'home_pages#about'
+
+
+  get 'users/new'
+  get 'users/index'
+  get 'users/create'
+  get 'users/show'
+  get 'users/edit'
+  get 'users/update'
+  get 'users/destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

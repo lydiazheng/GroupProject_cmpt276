@@ -4,6 +4,11 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use postgresql as the database for Active Record
+
+#bootstrap
+gem 'bootstrap-sass', '3.3.7'
+
+#Postgresql
 gem 'pg'
 gem 'rails_12factor', group: :production
 # Use SCSS for stylesheets
