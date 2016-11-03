@@ -1,8 +1,8 @@
 {
-  "name": "CMPT276 Fall 2016 Assignment Two",
-  "description": "Tokimon",
+  "name": "Urban Hunt",
+  "description": "CMPT276 Fall 2016 Group 2 Project",
   "image": "heroku/ruby",
-  "repository": "https://github.com/Ida-Nakhostin/cmpt276-assignment-two",
+  "repository": "https://github.com/lydiazheng/GroupProject_cmpt276",
   "keywords": ["ruby", "rails" ],
   "addons": [ "heroku-postgresql" ]
 }
