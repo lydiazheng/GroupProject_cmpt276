@@ -41,6 +41,7 @@ textarea {
 
 #logo {
   float: left;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   margin-right: 10px;
   font-size: 1.7em;
   color: #fff;
@@ -51,7 +52,7 @@ textarea {
 }
 
 #logo:hover {
-  color: #fff;
+  color: #B0C4DE; /* Light Steel Blue  */
   text-decoration: none;
 }
 
@@ -86,17 +87,27 @@ footer ul li {
   float: left;
   margin-left: 15px;
 }
+/* home */
+
+.jumbotron {
+      background-color: #778899; /* LightSlateGrey  */
+      color: #DCDCDC; /*  Gainsboro  */
+      padding: 100px 25px;
+  }
 
 /* about */
   .bg-1 {
       background-color: #20B2AA; /* Light Sea Green */
       color: #ffffff;
+      padding: 20px 15px;
   }
   .bg-2 {
       background-color: #696969; /* Dark grey */
       color: #ffffff;
+      padding: 10px 15px;
   }
   .bg-3 {
       background-color: #fff; /* White */
       color: #555555;
+      padding: 10px 15px;
   }
