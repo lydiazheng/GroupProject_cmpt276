@@ -87,4 +87,16 @@ footer ul li {
   margin-left: 15px;
 }
 
-
+/* about */
+  .bg-1 {
+      background-color: #20B2AA; /* Light Sea Green */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #696969; /* Dark grey */
+      color: #ffffff;
+  }
+  .bg-3 {
+      background-color: #fff; /* White */
+      color: #555555;
+  }
