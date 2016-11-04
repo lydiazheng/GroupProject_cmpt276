@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+q1:
+  question: What is your favorite game?
+
+q2:
+  question: What is your favorite animal?
