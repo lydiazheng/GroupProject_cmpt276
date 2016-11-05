@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   before_save :default_values
   def default_values
     self.email = email.downcase
-    self.is_admin = is_admin.presence || false
+    
   end
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

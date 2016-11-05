@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def destroy
   end
-end
+
 
   private
 
@@ -37,7 +37,7 @@ end
                                    :password_confirmation)
     end
 
-
+end
 
 
 
