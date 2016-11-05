@@ -34,8 +34,7 @@ end
 
     def user_params
       params.require(:user).permit(:username, :firstname, :lastname, :email, :password,
-                                   :password_confirmation,:question1, :answer_q1,
-                                   :question2, :answer_q2)
+                                   :password_confirmation)
     end
 
 

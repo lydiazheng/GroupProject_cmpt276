@@ -29,10 +29,6 @@ ActiveRecord::Schema.define(version: 20161105002350) do
     t.string   "lastname"
     t.string   "username",                        null: false
     t.boolean  "is_admin",        default: false
-    t.integer  "question1_id"
-    t.integer  "question2_id"
-    t.string   "answer_q1",                       null: false
-    t.string   "answer_q2",                       null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
@@ -40,6 +36,4 @@ ActiveRecord::Schema.define(version: 20161105002350) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
-  add_foreign_key "users", "security_questions", column: "question1_id"
-  add_foreign_key "users", "security_questions", column: "question2_id"
 end
