@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @user = User.all
   end
 
   def create
@@ -65,11 +66,3 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
 end
-
-
-
-
-
-
-
-
