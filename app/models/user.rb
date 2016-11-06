@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
-  before_save :default_values
-  before_create :create_remember_token
   attr_accessor :remember_token
+  before_save :default_values
+  
+  
   def default_values
     self.email = email.downcase
 
