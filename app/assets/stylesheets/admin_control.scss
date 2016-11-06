@@ -1,3 +1,33 @@
 // Place all the styles related to the admin_control controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$brand-primary: #a6192e;
+$dark_gray_primary:#202020;
+.users_table{
+  border:.15px solid;
+  border-color:white;
+}
+
+.users_table thead{
+  background-color: lighten($dark_gray_primary, 3%);
+  color:white;
+}
+.users_table th{
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.oddline{
+  background: lighten($dark_gray_primary, 25%);
+  color: white;
+  text-align: center;
+}
+.evenline{
+  background: lighten($dark_gray_primary, 15%);
+  color: white;
+  text-align: center;
+}
+
+.user_container{
+  border-top: 5px;
+}
