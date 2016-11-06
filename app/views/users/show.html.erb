@@ -1,11 +1,62 @@
 <% provide(:title, @user.username) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
+
+<body class="user_show_page">
+
+<!-- Page Content -->
+<div class="container">
+    <!-- First Featurette -->
+    <div class="featurette" id="about">
+        <div class="container">
+             <div class="row profile">
+                <div class="col-md-3">
+                    <div class="profile-sidebar">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic text-center">
+                            <%= gravatar_for @user %>
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                <%= @user.username %><br>
+                                E-mail: <%= @user.email %> <br>
+        						Firstname: <%= @user.firstname %><br>
+        						Lastname: <%= @user.lastname %><br>
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                           
+                        <!-- SIDEBAR MENU -->
+                        <div class="profile-usermenu">
+                            <ul class="nav">
+                                <li class="active">
+                                	<a href="#"><i class="glyphicon glyphicon-home"></i> Game Rank</a>
+                                </li>
+
+                                <li>
+                                	<a href="#"><i class="glyphicon glyphicon-ok"></i> Game History</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END MENU -->
+
+                    </div>
+                </div>
+
+
+				<!-- Profile content -->
+                <div class="col-md-9">                  
+                <div class="profile-content text-center">
+                		<h2>Game Statements:<br></h2> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<br>
+<br>
+
        
-        <%= @user.username %>
-      </h1>
-    </section>
-  </aside>
-</div>
+
+</body>
