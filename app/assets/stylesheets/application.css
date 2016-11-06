@@ -279,7 +279,7 @@ width: 50%;
 /*end of user show page*/
 
 
-
+/* Remember me*/
 .checkbox {
   margin-top: -10px;
   margin-bottom: 10px;
@@ -294,6 +294,9 @@ width: 50%;
   margin-left: 0;
 }
 
+.remember-me{
+  margin-left: 15px;
+}
 
 
 
