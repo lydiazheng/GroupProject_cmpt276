@@ -12,5 +12,8 @@ class AdminControlController < ApplicationController
   end
 
   def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "Delete successfully!"
+    redirect_to admin_control
   end
 end

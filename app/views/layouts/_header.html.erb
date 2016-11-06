@@ -8,10 +8,11 @@
          <% if logged_in? %>
           <li><%= link_to "Profile", current_user %></li>
            <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-            
+
           </li>
         <% else %>
           <li><%= link_to "Log in", login_path %></li>
+          <li><%= link_to "Admin", admin_control_url %></li>
         <% end %>
       </ul>
     </nav>
