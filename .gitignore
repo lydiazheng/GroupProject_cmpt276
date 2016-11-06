@@ -24,3 +24,6 @@
 
 # Ignore diff compare file
 *.orig
+
+# Ignore application configuration
+/config/application.yml
