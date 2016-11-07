@@ -16,6 +16,12 @@ ActiveRecord::Schema.define(version: 20161106061146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "security_questions", force: :cascade do |t|
+    t.string   "question"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                           null: false
     t.string   "password_digest"
@@ -23,6 +29,10 @@ ActiveRecord::Schema.define(version: 20161106061146) do
     t.string   "lastname"
     t.string   "username",                        null: false
     t.boolean  "is_admin",        default: false
+    t.integer  "question1_id"
+    t.integer  "question2_id"
+    t.string   "answer_q1",                       null: false
+    t.string   "answer_q2",                       null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.string   "remember_digest"
@@ -31,12 +41,6 @@ ActiveRecord::Schema.define(version: 20161106061146) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
-  create_table "widgets", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "stock"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
+  add_foreign_key "users", "security_questions", column: "question1_id"
+  add_foreign_key "users", "security_questions", column: "question2_id"
 end
