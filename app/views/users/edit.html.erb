@@ -19,7 +19,7 @@
       <%= f.email_field :email, class: 'form-control' %>
 
       <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= f.password_field :password, class: 'form-control', id: 'password', data: { toggle: 'popover', trigger: 'hover', placement: 'top', content: 'Must be at least 6 characters and include uppercase and lowercase letters, digit and symbol.' } %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
