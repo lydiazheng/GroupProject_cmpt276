@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token
   before_save :default_values
-  
-  
+
+
   def default_values
     self.email = email.downcase
 
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates :lastname, length: { maximum: 64 }
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, format: {with: COMPLEX_PASSWORD_REGEX , message: "must be at least 6 characters and include uppercase and lowercase letters, digit and symbol."}
+  validates :password, presence: true, length: { minimum: 6 }, format: {with: COMPLEX_PASSWORD_REGEX , message: "must be at least 6 characters and include uppercase and lowercase letters, digit and symbol."}, allow_nil: true
 
   # Returns the hash digest of the given string.
   def User.digest(string)
