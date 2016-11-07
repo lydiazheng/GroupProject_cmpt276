@@ -3,15 +3,16 @@ require 'test_helper'
 class UsersEditTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:Hao)
+    @user = users(:john)
   end
 
   test "unsuccessful edit" do
   	log_in_as(@user)
     get edit_user_path(@user)
     assert_template 'users/edit'
-    patch user_path(@user), params: { user: { name:  "",
+    patch user_path(@user), params: { user: { firstname:  "foo",
                                               email: "foo@invalid",
+                                              username: "foo",
                                               password:              "foo",
                                               password_confirmation: "bar" } }
 
@@ -22,9 +23,9 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     get edit_user_path(@user)
     log_in_as(@user)
     assert_redirected_to edit_user_url(@user)
-    name  = "Foo Bar"
+    firstname  = "Foo"
     email = "foo@bar.com"
-    patch user_path(@user), params: { user: { name:  name,
+    patch user_path(@user), params: { user: { firstname:  firstname,
                                               email: email,
                                               password:              "",
                                               password_confirmation: "" } }
@@ -42,8 +43,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect update when not logged in" do
-    patch user_path(@user), params: { user: { name: @user.name,
-                                              email: @user.email } }
+    patch user_path(@user), params: { user: { email: @user.email } }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
