@@ -94,18 +94,4 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test "answer_q1 should be present" do
-    @user.answer_q1 = "     "
-    assert_not @user.valid?
-  end
-
-  test "answer_q2 should be present" do
-    @user.answer_q1 = "     "
-    assert_not @user.valid?
-  end
-
-
-
-
-
 end
