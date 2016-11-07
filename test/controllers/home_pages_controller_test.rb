@@ -21,4 +21,8 @@ class HomePagesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should have a current_user" do
+    subject.current_user.should_not be_nil
+  end
+
 end
