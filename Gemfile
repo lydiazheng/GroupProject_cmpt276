@@ -20,6 +20,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
+gem 'jquery-datatables-rails', '~> 3.4.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links zin your web application faster. Read more: https://github.com/rails/turbolinks
@@ -37,7 +38,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'puma', '~> 3.0'
 
-gem 'figaro'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

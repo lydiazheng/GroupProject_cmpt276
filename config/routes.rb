@@ -1,20 +1,9 @@
 Rails.application.routes.draw do
-  get 'admin_control/index'
-
-  get 'admin_control/new'
-
-  get 'admin_control/create'
-
-  get 'admin_control/destroy'
-
   get 'sessions/new'
 
   root 'home_pages#home'
   get  '/about',   to: 'home_pages#about'
   resources :users
-
-  get 'admin' => 'admin_control#index', :as => :admin
-  resource :admin_control, only: [:index, :new, :create, :destroy]
 
   get 'users/new'
   get 'users/index'
