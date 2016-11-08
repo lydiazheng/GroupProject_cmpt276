@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20161106061146) do
     t.string   "firstname",                       null: false
     t.string   "lastname"
     t.string   "username",                        null: false
-    t.boolean  "is_admin",        default: false
+    t.boolean  "is_admin",                        default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.string   "remember_digest"
@@ -30,5 +30,4 @@ ActiveRecord::Schema.define(version: 20161106061146) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
-
 end

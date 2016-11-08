@@ -29,15 +29,14 @@
                         <!-- SIDEBAR MENU -->
                         <div class="profile-usermenu">
                             <ul class="nav">
-                                
-                                <a href="#"><span class="glyphicon glyphicon-home"></span><li class="active"> Game Rank</a>
+                                <li class="active">
+                                	<a href="#"><i class="glyphicon glyphicon-home"></i> Game Rank</a>
                                 </li>
 
-                                <a href="#"><i class="glyphicon glyphicon-ok"></i><li> Game History</a>
+                                <li>
+                                	<a href="#"><i class="glyphicon glyphicon-ok"></i> Game History</a>
                                 </li>
-
-                                <a><span class="glyphicon glyphicon-cog"></span></a><li><%= link_to "Settings", edit_user_path(current_user) %>
-                                </li>
+                                <li><%= link_to "Settings", edit_user_path(current_user) %></li>
                             </ul>
                         </div>
                         <!-- END MENU -->
