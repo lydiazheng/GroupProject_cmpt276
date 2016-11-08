@@ -6,6 +6,11 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user = users(:john)
   end
 
+  # Log in as a particular user.
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
+
   test "unsuccessful edit" do
   	log_in_as(@user)
     get edit_user_path(@user)
@@ -32,7 +37,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to @user
     @user.reload
-    assert_equal name,  @user.name
+    assert_equal firstname,  @user.firstname
     assert_equal email, @user.email
   end
 
