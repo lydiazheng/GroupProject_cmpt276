@@ -218,7 +218,7 @@ input {
 
 /* Profile sidebar */
 .profile-sidebar {
-  padding: 20px 0 10px 0;
+  padding: 20px 0 0 0;
   background: #fff;
 }
 
@@ -249,7 +249,7 @@ width: 50%;
 
 .profile-usermenu ul li {
   border-bottom: 1px solid #f0f4f7;
-  background-color: #f6f9fb;
+  background-color:  #E6F2FF;
 }
 
 .profile-usermenu ul li:last-child{
@@ -265,7 +265,7 @@ width: 50%;
 }
 
 .profile-usermenu ul li #side-bar:hover{
-  background-color: #fafcfd;
+  background-color: #E6F2FF;
   color: #5b9bd1;
 }
 
