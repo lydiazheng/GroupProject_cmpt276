@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <!-- END SIDEBAR USER TITLE -->
-                           
+
                         <!-- SIDEBAR MENU -->
                         <div class="profile-usermenu">
                             <ul class="nav">
@@ -36,7 +36,10 @@
                                 <li>
                                 	<a href="#"><i class="glyphicon glyphicon-ok"></i> Game History</a>
                                 </li>
-                                <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                                <li><%= link_to edit_user_path(current_user) do %>
+                                <i class="glyphicon glyphicon-cog"></i> Settings
+                                <% end %>
+                              </li>
                             </ul>
                         </div>
                         <!-- END MENU -->
@@ -46,10 +49,10 @@
 
 
 				<!-- Profile content -->
-                <div class="col-md-9">                  
+                <div class="col-md-9">
                 <div class="profile-content text-center">
-                		<h2>Game Statements:<br></h2> 
-                        
+                		<h2>Game Statements:<br></h2>
+
                     </div>
                 </div>
             </div>
@@ -58,6 +61,6 @@
 <br>
 <br>
 
-       
+
 
 </body>
