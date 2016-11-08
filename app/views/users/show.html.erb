@@ -29,14 +29,14 @@
                         <!-- SIDEBAR MENU -->
                         <div class="profile-usermenu">
                             <ul class="nav">
-                                
-                                <a href="#"><span class="glyphicon glyphicon-home"></span><li class="active"> Game Rank</a>
+                                <li class="active">
+                                <span class="glyphicon glyphicon-home" class="side"><%= link_to "Game Rank", '#', id:"side-bar" %></span>
                                 </li>
 
-                                <a href="#"><i class="glyphicon glyphicon-ok"></i><li> Game History</a>
+                                <li class="active"><span class="glyphicon glyphicon-ok" class="side"><%= link_to "Game History", '#', id:"side-bar" %></span>
                                 </li>
 
-                                <a><span class="glyphicon glyphicon-cog"></span></a><li><%= link_to "Settings", edit_user_path(current_user) %>
+                                <li class="active"><span class="glyphicon glyphicon-cog" class="side"><%= link_to "Settings", edit_user_path(current_user), id:"side-bar" %></span>
                                 </li>
                             </ul>
                         </div>
