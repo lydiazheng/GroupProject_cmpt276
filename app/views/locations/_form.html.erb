@@ -1,0 +1,46 @@
+<%= form_for(@location) do |f| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        The form contains <%= pluralize(@user.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @location.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.label :latitude %>
+  <%= f.text_field :latitude, class: 'form-control' %>
+
+  <%= f.label :longitude %>
+  <%= f.text_field :longitude, class: 'form-control' %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description, class: 'form-control' %>
+
+  <%= f.label :points %>
+  <%= f.number_field :points, class: 'form-control' %>
+
+  <%= f.label :hint1 %>
+  <%= f.text_field :hint1, class: 'form-control' %>
+
+  <%= f.label :hint1_points %>
+  <%= f.number_field :hint1_points, class: 'form-control' %>
+
+  <%= f.label :hint2 %>
+  <%= f.text_field :hint2, class: 'form-control' %>
+
+  <%= f.label :hint2_points %>
+  <%= f.number_field :hint2_points, class: 'form-control' %>
+
+  <%= f.label :area %>
+  <%= f.text_field :area, class: 'form-control' %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+
+  <br>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>
