@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Locations</h1>
+<div class="row">
+  <table id="js-locations-dt" class="table table-condensed table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>latitude</th>
+        <th>longitude</th>
+        <th>description</th>
+        <th>points</th>
+        <th>area</th>
+        <th>image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr>
+          <td><%= location.latitude %></td>
+          <td><%= location.longitude %></td>
+          <td><%= location.description %></td>
+          <td><%= location.points %></td>
+          <td><%= location.area%></td>
+          <td><%= image_tag location.image.url(:thumb) %></td>
+          <td>
+            <%= link_to 'Show', location, class: 'btn btn-info'  %>
+            <%= link_to 'Edit', edit_location_path(location), class: 'btn btn-info'  %>
+            <%= link_to 'Destroy', location, class: 'btn btn-info', method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'New Location', new_location_path, class: 'btn btn-info' %>

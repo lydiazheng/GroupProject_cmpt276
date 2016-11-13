@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :locations
   get 'sessions/new'
 
   root 'home_pages#home'
