@@ -269,9 +269,13 @@ width: 50%;
   color: #5b9bd1;
 }
 
-.profile-usermenu ul #side-bar li.active{
+.profile-usermenu ul li.active{
+  border-bottom: none;
+}
+
+.profile-usermenu ul li.active #side-bar{
   color: #5b9bd1;
-  background-color: #f6f9fb;
+  background-color: #E6F2FF;
   margin-left: -2px;
   font-size: 20px;
 }
