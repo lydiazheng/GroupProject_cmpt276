@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+<div class="location-show text-center">
+<div class="container-fluid text-center">
+  <h2>Information</h2>
+  <h4>--location--</h4>
+  <%= image_tag @location.image.url %>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-resize-horizontal"></span>
+      <h4>LATITUDE</h4>
+      <p><%= @location.latitude %></p>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-resize-vertical"></span>
+      <h4>LONGITUDE</h4>
+      <p><%= @location.longitude %></p>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-question-sign"></span>
+      <h4>DESCRIPTION</h4>
+      <p><%= @location.description %></p>
+    </div>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-leaf"></span>
+      <h4>HINT 1</h4>
+      <p><%= @location.hint1 %></p>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-certificate"></span>
+      <h4>HINT 2</h4>
+      <p><%= @location.hint2 %></p>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-globe"></span>
+      <h4 style="color:#303030;">AREA</h4>
+      <p><%= @location.area%></p>
+    </div>
+  </div>
+</div>
+
+<div   class="button-location-show">
+<%= link_to 'Edit', edit_location_path(@location), class: "btn btn-default btn-lg" %> |
+<%= link_to 'Back', locations_path, class: "btn btn-default btn-lg"%>
+</div>
+
+</div>
+
+
+

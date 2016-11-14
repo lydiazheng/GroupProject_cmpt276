@@ -38,7 +38,13 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'puma', '~> 3.0'
 
+gem 'geocoder'
 
+#file attachment library
+gem 'paperclip'
+
+# Amazon s3
+gem 'aws-sdk', '~> 2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
