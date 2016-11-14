@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   resources :locations
   get 'sessions/new'
 
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
-
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 
   match	':controller(/:action(/:id))',	:via	=>	:get
 
