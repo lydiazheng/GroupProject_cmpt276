@@ -52,8 +52,12 @@
                 <div class="col-md-9">
                 <div class="profile-content text-center" class="profile-game">
                         <h2>Urban Hunt<br></h2>
-                        <h1>Game Start!</h1><br>
-                            <button class="btn btn-lg btn-info btn-lg"><%= link_to "Start Game", '#' %></button><br><br>
+                        <h1>Game Start!</h1>
+                        <div class="tech-slideshow">
+                            <div class="mover-1"></div>
+                            <div class="mover-2"></div>
+                        </div><br>
+                            <button class="btn btn-lg btn-warning btn-lg"><%= link_to "Start Game", '#' %></button>
 
                             <% if logged_in? && current_user.is_admin? %>
                             <button class="btn btn-lg btn-info btn-lg"><%= link_to "Create Location", locations_path %></button>
