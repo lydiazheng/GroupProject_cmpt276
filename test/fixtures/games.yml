@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: 
+  duration: 1
+  gdatetime: 2016-11-13 17:12:32
+  organizer_id: 1
+
+two:
+  title: 
+  duration: 1
+  gdatetime: 2016-11-13 17:12:32
+  organizer_id: 1
