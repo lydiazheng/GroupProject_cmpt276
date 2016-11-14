@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  latitude: 1.5
+  longitude: 1.5
+  address: MyString
+  description: MyText
+  points: 1
+  hint1: MyString
+  hint2: MyString
+  hint1_points: 1
+  hint2_points: 1
+  area: MyString
+
+two:
+  latitude: 1.5
+  longitude: 1.5
+  address: MyString
+  description: MyText
+  points: 1
+  hint1: MyString
+  hint2: MyString
+  hint1_points: 1
+  hint2_points: 1
+  area: MyString
