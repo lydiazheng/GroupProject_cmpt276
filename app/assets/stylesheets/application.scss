@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require jquery-ui
+ *= require rails_bootstrap_forms
  *= require_tree .
  *= require_self
  */
@@ -344,7 +346,7 @@ width: 50%;
 }
 
 @keyframes moveSlideshow {
-  100% { 
-    transform: translateX(-66.6666%);  
+  100% {
+    transform: translateX(-66.6666%);
   }
 }
