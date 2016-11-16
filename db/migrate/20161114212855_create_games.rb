@@ -8,9 +8,10 @@ class CreateGames < ActiveRecord::Migration
       t.integer :duration
       t.date :starts_at_date
       t.time :starts_at_time
-      t.integer :organizer_id
+      t.belongs_to :organizer, references: :users, index: true
 
       t.timestamps null: false
     end
+    add_foreign_key :games, :users, column: :organizer_id
   end
 end
