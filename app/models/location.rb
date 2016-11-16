@@ -4,6 +4,8 @@ class Location < ActiveRecord::Base
   has_many :hunts
   has_many :games, through: :hunts
 
+  has_many :game_histories
+
   has_attached_file :image, styles: {
     thumb: '100x100#',
     square: '200x200>',

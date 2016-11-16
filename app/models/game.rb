@@ -9,6 +9,8 @@ class Game < ActiveRecord::Base
   has_many :plays
   has_many :users, through: :plays
 
+  has_many :game_histories
+
   geocoded_by :address
   after_validation :geocode
 end
