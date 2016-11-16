@@ -6,5 +6,6 @@ class CreateHunts < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :hunts, [:game_id, :location_id], unique: true
   end
 end

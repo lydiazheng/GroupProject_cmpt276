@@ -2,8 +2,10 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token
   before_save :default_values
 
-  has_many :games
+  has_many :organized_games, foreign_key: "organizer_id", class_name: "Game"
 
+  has_many :plays
+  has_many :games, through: :plays
 
   def default_values
     self.email = email.downcase
