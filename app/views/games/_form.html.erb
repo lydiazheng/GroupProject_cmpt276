@@ -1,0 +1,28 @@
+<div class="row panel-body">
+<%= bootstrap_form_for(@game) do |f| %>
+  <% if @game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+      <% @game.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="col-md-6">
+    <%= f.text_field :title %>
+    <%= f.number_field :duration %>
+    <%= f.text_field :starts_at_date, class: 'datepicker', label: 'Start Date' %>
+    <%= f.time_select :starts_at_time, label: 'Start Time' %>
+  </div>
+  <div class="col-md-6">
+    Google map start point pin
+  </div>
+  <div class="col-md-12">
+    <%= f.button "Submit", type: 'submit', class: 'btn btn-primary' %>
+    <%= link_to 'Back', games_path, class: 'btn btn-warning' %>
+  </div>
+<% end %>
+</div>
