@@ -2,10 +2,15 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :default_values
 
+  has_many :organized_games, foreign_key: "organizer_id", class_name: "Game"
+
+  has_many :plays
+  has_many :games, through: :plays
+
+  has_many :game_histories
 
   def default_values
     self.email = email.downcase
-
   end
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

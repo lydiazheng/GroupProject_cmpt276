@@ -8,6 +8,8 @@ gem 'rails', '4.2.3'
 #bootstrap
 gem 'bootstrap-sass', '3.3.7'
 
+gem 'bootstrap_form'
+
 #Postgresql
 gem 'pg'
 gem 'rails_12factor', group: :production
@@ -19,6 +21,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
+
+gem 'jquery-ui-rails'
 
 gem 'jquery-datatables-rails', '~> 3.4.0'
 # Use jquery as the JavaScript library
