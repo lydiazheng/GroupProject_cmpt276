@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require jquery-ui
+ *= require rails_bootstrap_forms
  *= require_tree .
  *= require_self
  */
@@ -300,7 +302,6 @@ width: 50%;
 .remember-me{
   margin-left: 15px;
 }
-
 /* location show page*/
 .location-show{
   background-color: #D3D3D3; /* LightSlateGrey  */
@@ -322,6 +323,16 @@ width: 50%;
 }
 
 /* user profile animation*/
+
+.tech-slideshow {
+  height: 200px;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
 .tech-slideshow > div {
   height: 200px;
   width: 2526px;
@@ -333,22 +344,21 @@ width: 50%;
   transform: translate3d(0, 0, 0);
 }
 .tech-slideshow .mover-1 {
-  animation: moveSlideshow 12s linear infinite;
+  animation: moveSlideshow 30s linear infinite;
 }
 .tech-slideshow .mover-2 {
   opacity: 0;
   transition: opacity 0.5s ease-out;
   background-position: 0 -200px;
-  animation: moveSlideshow 15s linear infinite;
+  animation: moveSlideshow 25s linear infinite;
 }
 .tech-slideshow:hover .mover-2 {
   opacity: 1;
+
 }
 
 @keyframes moveSlideshow {
-  100% { 
-    transform: translateX(-66.6666%);  
+  100% {
+    transform: translateX(-66.6666%);
   }
 }
-
-

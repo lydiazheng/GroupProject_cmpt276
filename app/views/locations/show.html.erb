@@ -3,7 +3,7 @@
 <div class="container-fluid text-center">
   <h2>Information</h2>
   <h4>--location--</h4>
-  <%= image_tag @location.image.url %>
+  <%= image_tag @location.image.url(:medium) %>
   <br>
   <br>
   <div class="row">
@@ -44,11 +44,8 @@
 </div>
 
 <div   class="button-location-show">
-<%= link_to 'Edit', edit_location_path(@location), class: "btn btn-default btn-lg" %> |
-<%= link_to 'Back', locations_path, class: "btn btn-default btn-lg"%>
+<%= link_to 'Edit', edit_location_path(@location), class: "btn btn-default btn-info btn-lg" %> |
+<%= link_to 'Back', locations_path, class: "btn btn-default btn-warning btn-lg"%>
 </div>
 
 </div>
-
-
-

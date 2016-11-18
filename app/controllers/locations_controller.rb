@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:index, :show, :new, :edit, :update, :destroy]
 
   # GET /locations
   def index
@@ -64,5 +64,5 @@ class LocationsController < ApplicationController
       redirect_to(root_url) unless current_user.is_admin?
     end
 
-    
+
 end
