@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 500px;
+        width: 500px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="button" value="Drop Pin" onclick="DropPin()"> Drop a marker on the map to get the coordinates<br>
+    <div id="map"></div>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
+
+
+    <script>
+    //calculates distance between two points 
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 49.279389, lng: -122.918836},
+          zoom: 12
+        });
+      }
+
+      var p1 = new google.maps.LatLng(49.279389, -122.918836);
+      var p2 = new google.maps.LatLng(49.278929, -122.919163);
+
+      //alert(calcDistance(p1, p2));
+
+      //calculates distance between two points in m's
+      function calcDistance(p1, p2) {
+      var dis = (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+      return dis*1000;
+      }
+    </script>
+
+    <script type="text/javascript">
+      var Marker;
+      function DropPin() {
+        // if the previous marker exists, remove it
+        if (Marker) {
+          Marker.setMap(null);
+        }
+        //else create a new marker
+        Marker = new google.maps.Marker({
+          position: map.getCenter(),
+          map: map,
+          draggable: true,
+        });
+
+        FillTheInput();
+
+        // add an event 'ondrag'
+        google.maps.event.addListener(Marker, 'dragend', function() {FillTheInput();});
+
+
+      }
+
+      function FillTheInput(){
+        document.getElementById("location_latitude").value = Marker.getPosition().lat();
+
+        document.getElementById("location_longitude").value = Marker.getPosition().lng();
+
+      }
+      
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyLC91dEnzjgV7RBb3Crp-KnhSQLNAuR4&callback=initMap"
+    async defer></script>
+  </body>
+</html>
