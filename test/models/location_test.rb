@@ -27,8 +27,6 @@ class LocationTest < ActiveSupport::TestCase
    end
  end
   
-
-
   test "the latitude can be absent" do
     @location.latitude = "     "
     assert @location.valid?
@@ -46,5 +44,84 @@ class LocationTest < ActiveSupport::TestCase
      assert @location.valid?
    end
  end
+
+ test "the address can be any type" do
+  valid_addresses = [
+    "abcdff",
+    "12 sdf",
+    "!!12 ASD",
+    "      "]
+  valid_addresses.each do |valid_address|
+    @location.address = valid_address
+    assert @location.address
+  end
 end
+  
+  test "the discription can be any type" do
+  valid_discriptions = [
+    "abcdff",
+    "12 sdf",
+    "!!12 ASD",
+    "      "]
+  valid_discriptions.each do |valid_discription|
+    @location.discription = valid_discription
+    assert @location.discription
+  end
+end
+
+  test "the hint1 can be any type" do
+  valid_hint1s = [
+    "abcdff",
+    "12 sdf",
+    "!!12 ASD",
+    "      ",
+    "+-*/ ASD dfsc"]
+  valid_hint1s.each do |valid_hint1|
+    @location.hint1 = valid_hint1
+    assert @location.hint1
+  end
+end
+  
+  test "the hint2 can be any type" do
+  valid_hint2s = [
+    "abcdff",
+    "12 sdf",
+    "!!12 ASD",
+    "      ",
+    "+-*/ ASD dfsc"]
+  valid_hint2s.each do |valid_hint2|
+    @location.hint2 = valid_hint2
+    assert @location.hint2
+  end
+end
+
+  test "the area can be any type" do
+  valid_areas = [
+    "abcdff",
+    "12 sdf",
+    "!!12 ASD",
+    "      ",
+    "+-*/ ASD dfsc"]
+  valid_areas.each do |valid_area|
+    @location.area = valid_area
+    assert @location.area
+  end
+end
+
+  
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
