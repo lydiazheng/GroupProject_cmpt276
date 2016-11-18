@@ -1,25 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  latitude: 1.5
-  longitude: 1.5
-  address: MyString
-  description: MyText
-  points: 1
-  hint1: MyString
-  hint2: MyString
-  hint1_points: 1
-  hint2_points: 1
-  area: MyString
+SFU_library:
+  latitude: 49.278102
+  longitude: -122.919900
+  address: 8888 University Dr
+  description: SFU
+  points: 10
+  hint1: The location is in one of the most famous university
+  hint2: Students can borrow books from it
+  hint1_points: 4
+  hint2_points: 4
+  area: SFU campus
 
-two:
-  latitude: 1.5
-  longitude: 1.5
-  address: MyString
-  description: MyText
-  points: 1
-  hint1: MyString
-  hint2: MyString
-  hint1_points: 1
-  hint2_points: 1
-  area: MyString
