@@ -9,6 +9,7 @@
     <tr>
       <th>Game name</th>
       <th>Start date</th>
+      <th>Start time</th>
       <th>Duration(hours)</th>
       <th>Actions</th>
     </tr>
@@ -19,11 +20,15 @@
       <tr>
         <td><%= game.title %></td>
         <td><%= game.starts_at_date %></td>
+        <td><%= game.starts_at_time %></td>
         <td><%= game.duration %></td>
         <td>
           <%= link_to 'Show', game, class: 'btn btn-info' %>
-          <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-info' %>
-          <%= link_to 'Destroy', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if logged_in? && current_user.is_admin? %>
+            <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-info' %>
+            <%= link_to 'Destroy', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+          <%= link_to "Join Game", '#', class: 'btn btn-success' %>
         </td>
       </tr>
     <% end %>
@@ -33,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Game', new_game_path, class: 'btn btn-info' %>
+<%= link_to 'New Game', new_game_path, class: 'btn btn-primary' %>

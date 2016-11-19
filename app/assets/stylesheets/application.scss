@@ -345,6 +345,15 @@ width: 50%;
   opacity: 1;
 }
 
+.game-show{
+  background-color: #D3D3D3; /* LightSlateGrey  */
+  padding: 30px 25px;
+  border-radius: 10px;
+}
+.button-game-show{
+  text-align: center;
+}
+
 @keyframes moveSlideshow {
   100% {
     transform: translateX(-66.6666%);
