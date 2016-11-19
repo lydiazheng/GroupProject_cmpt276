@@ -350,3 +350,19 @@ width: 50%;
     transform: translateX(-66.6666%);
   }
 }
+
+/* map in location show page */
+#map {
+  height: 500px;
+  width: 500px;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
