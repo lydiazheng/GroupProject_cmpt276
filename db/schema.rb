@@ -114,3 +114,4 @@ ActiveRecord::Schema.define(version: 20161116085436) do
   add_foreign_key "plays", "games"
   add_foreign_key "plays", "users"
 end
+
