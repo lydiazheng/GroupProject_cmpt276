@@ -22,6 +22,7 @@ class GamesController < ApplicationController
   # POST /games
   def create
     @game = Game.new(game_params)
+    @game.organizer = current_user
     if @game.save
       format.html { redirect_to @game, notice: 'Game was successfully created.' }
     else
@@ -52,6 +53,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params[:game]
+      params[:game].permit(:title,:duration,:starts_at_date,:starts_at_time,:latitude,:longitude,  location_ids: [])
     end
 end

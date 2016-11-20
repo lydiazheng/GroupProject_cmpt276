@@ -4,11 +4,27 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
-    @locations = Location.all
+    if(params.has_key?(:lat) && params.has_key?(:lng) && params.has_key?(:distance))
+      lat = Float(params[:lat])
+      lng = Float(params[:lng])
+      distance = Float(params[:distance])
+      @locations = Location.near([lat, lng], distance, :units => :km)
+    else
+      @locations = Location.all
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @locations }
+    end
   end
 
   # GET /locations/1
   def show
+    @location = Location.find(params[:id])
+  end
+
+  # GET /locations/nearby
+  def nearby
     @location = Location.find(params[:id])
   end
 

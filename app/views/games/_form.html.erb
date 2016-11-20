@@ -13,12 +13,28 @@
   <% end %>
   <div class="col-md-6">
     <%= f.text_field :title %>
-    <%= f.number_field :duration %>
+    <%= f.number_field :duration, append: "min"%>
     <%= f.text_field :starts_at_date, class: 'datepicker', label: 'Start Date' %>
     <%= f.time_select :starts_at_time, label: 'Start Time' %>
   </div>
   <div class="col-md-6">
-    <div id="map" style="height:400px;"></div>
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+    <div class="form-group">
+      <label class="control-label">Starting Point</label>
+      <%= render 'map' %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="control-label" for="distance">Filter locations by distance from starting point:</label>
+        <div class="input-group">
+          <input class="form-control" value=2 type="number" name="distance" id="distance">
+          <span class="input-group-addon">km</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="col-md-12">
     <%= f.button "Submit", type: 'submit', class: 'btn btn-primary' %>
@@ -26,19 +42,3 @@
   </div>
 <% end %>
 </div>
-<script>
-  function initMap() {
-    var uluru = {lat: -25.363, lng: 131.044};
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      center: uluru
-    });
-    var marker = new google.maps.Marker({
-      position: uluru,
-      map: map
-    });
-  }
-</script>
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.configuration.google_api_key %>&callback=initMap">
-</script>
