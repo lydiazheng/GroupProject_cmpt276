@@ -20,8 +20,8 @@
                             <div class="profile-usertitle-name">
                                 <%= @user.username %><br>
                                 E-mail: <%= @user.email %> <br>
-                                Firstname: <%= @user.firstname %><br>
-                                Lastname: <%= @user.lastname %><br>
+        						Firstname: <%= @user.firstname %><br>
+        						Lastname: <%= @user.lastname %><br>
                             </div>
                         </div>
                         <!-- END SIDEBAR USER TITLE -->
@@ -30,11 +30,11 @@
                         <div class="profile-usermenu">
                             <ul class="nav">
                                 <li class="active">
-                                    <a href="#"><i class="glyphicon glyphicon-home"></i> Game Rank</a>
+                                	<a href="#"><i class="glyphicon glyphicon-home"></i> Game Rank</a>
                                 </li>
 
                                 <li>
-                                    <a href="#"><i class="glyphicon glyphicon-ok"></i> Game History</a>
+                                	<a href="#"><i class="glyphicon glyphicon-ok"></i> Game History</a>
                                 </li>
                                 <li><%= link_to edit_user_path(current_user) do %>
                                 <i class="glyphicon glyphicon-cog"></i> Settings
@@ -48,20 +48,11 @@
                 </div>
 
 
-                <!-- Profile content -->
+				<!-- Profile content -->
                 <div class="col-md-9">
-                <div class="profile-content text-center" class="profile-game">
-                        <h2>Urban Hunt<br></h2>
-                        <h1>Game Start!</h1>
-                        <div class="tech-slideshow">
-                            <div class="mover-1"></div>
-                            <div class="mover-2"></div>
-                        </div><br>
-                            <button class="btn btn-lg btn-warning btn-lg"><%= link_to "Start Game", '#' %></button>
+                <div class="profile-content text-center">
+                		<h2>Game Statements:<br></h2>
 
-                            <% if logged_in? && current_user.is_admin? %>
-                            <button class="btn btn-lg btn-info btn-lg"><%= link_to "Create Location", locations_path %></button>
-                            <% end %>
                     </div>
                 </div>
             </div>
