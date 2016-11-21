@@ -5,10 +5,14 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     if(params.has_key?(:lat) && params.has_key?(:lng) && params.has_key?(:distance))
-      lat = Float(params[:lat])
-      lng = Float(params[:lng])
-      distance = Float(params[:distance])
-      @locations = Location.near([lat, lng], distance, :units => :km)
+      begin
+        lat = Float(params[:lat])
+        lng = Float(params[:lng])
+        distance = Float(params[:distance])
+        @locations = Location.near([lat, lng], distance, :units => :km)
+      rescue
+        @locations = Location.all
+      end
     else
       @locations = Location.all
     end

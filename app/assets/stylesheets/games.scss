@@ -4,3 +4,39 @@
 .ui-datepicker {
   z-index: 100 !important;
 }
+
+#game-locations {
+  background-color: #eee;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+.js-gm-loc {
+  background: lightgrey;
+  text-align: center;
+  padding: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  input[type="checkbox"] {
+    font-size: xx-large;
+    vertical-align: top;
+    margin-top: 3px
+  }
+  .checkbox {
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+}
+.js-gm-loc.disabled {
+  color: grey;
+  opacity: 0.5;
+}
