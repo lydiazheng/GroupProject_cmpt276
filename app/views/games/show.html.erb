@@ -6,22 +6,34 @@
     <br>
     <br>
 
-    <div class="row">
-      <div class="col-sm-3">
+    <div class="row text-center" >
+      <div class="col-sm-2">
         <h4>TITLE</h4>
         <p><%= @game.title %></p>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
+        <h4>ADDRESS</h4>
+        <p><%= @game.address %></p>
+      </div>
+      <div class="col-sm-2">
         <h4>START DATE</h4>
         <p><%= @game.starts_at_date %></p>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
         <h4>START TIME</h4>
         <p><%= @game.starts_at_time %></p>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
         <h4>DURATION(hours)</h4>
         <p><%= @game.duration %></p>
+      </div>
+      <div class="col-sm-2">
+        <h4>ORGANIZER</h4>
+        <% if @game.organizer.present? %>
+        <p>
+          <%= link_to @game.organizer.username, @game.organizer %>
+        </p>
+      <% end %>
       </div>
     </div>
 
