@@ -25,7 +25,8 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.organizer = current_user
     if @game.save
-      redirect_to @game, notice: 'Game was successfully created.'
+      flash[:success] = 'Game was successfully created.'
+      redirect_to @game
     else
       render :new
     end
@@ -34,7 +35,8 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)
-      redirect_to @game, notice: 'Game was successfully updated.'
+      flash[:success] = 'Game was successfully updated.'
+      redirect_to @game
     else
       render :edit
     end
@@ -43,7 +45,8 @@ class GamesController < ApplicationController
   # DELETE /games/1
   def destroy
     @game.destroy
-    redirect_to games_url, notice: 'Game was successfully destroyed.'
+    flash[:success] = 'Game was successfully destroyed.'
+    redirect_to games_url 
   end
 
   private

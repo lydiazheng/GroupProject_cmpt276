@@ -29,7 +29,11 @@
   input[type="checkbox"] {
     font-size: xx-large;
     vertical-align: top;
-    margin-top: 3px
+    margin-top: 3px;
+    cursor: pointer;
+  }
+  input[type="checkbox"][disabled] {
+    cursor: not-allowed;
   }
   .checkbox {
     margin-top: 10px;
