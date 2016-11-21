@@ -12,6 +12,7 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
+    @locations = Location.all
     @game = Game.new
   end
 
@@ -22,26 +23,27 @@ class GamesController < ApplicationController
   # POST /games
   def create
     @game = Game.new(game_params)
+    @game.organizer = current_user
     if @game.save
-      format.html { redirect_to @game, notice: 'Game was successfully created.' }
+      redirect_to @game, notice: 'Game was successfully created.'
     else
-      format.html { render :new }
+      render :new
     end
   end
 
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)
-      format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+      redirect_to @game, notice: 'Game was successfully updated.'
     else
-      format.html { render :edit }
+      render :edit
     end
   end
 
   # DELETE /games/1
   def destroy
     @game.destroy
-    format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
+    redirect_to games_url, notice: 'Game was successfully destroyed.'
   end
 
   private
@@ -52,6 +54,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params[:game]
+      params[:game].permit(:title,:duration,:starts_at_date,:starts_at_time,:latitude,:longitude, location_ids: [])
     end
 end

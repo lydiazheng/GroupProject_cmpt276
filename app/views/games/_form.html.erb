@@ -13,12 +13,43 @@
   <% end %>
   <div class="col-md-6">
     <%= f.text_field :title %>
-    <%= f.number_field :duration %>
+    <%= f.number_field :duration, append: "min"%>
     <%= f.text_field :starts_at_date, class: 'datepicker', label: 'Start Date' %>
     <%= f.time_select :starts_at_time, label: 'Start Time' %>
   </div>
   <div class="col-md-6">
-    Google map start point pin
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+    <div class="form-group">
+      <label class="control-label">Starting Point</label>
+      <%= render 'map' %>
+    </div>
+  </div>
+  <div class="col-md-12" id="game-locations">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="control-label" for="distance">Filter locations by distance from starting point:</label>
+        <div class="input-group">
+          <input class="form-control" value=2 type="number" name="distance" id="distance">
+          <span class="input-group-addon">km</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <% Location.all.each do |location| %>
+        <div class="col-md-3">
+          <div class="form-group js-gm-loc" id="l<%= location.id %>">
+            <%= image_tag location.image.url(:square) %>
+            <div class="checkbox">
+              <label>
+                <%= check_box_tag "game[location_ids][]", location.id, f.object.locations.include?(location)%>
+                <%= location.area %> Area
+              </label>
+            </div>
+          </div>
+        </div>
+        <% end %>
+    </div>
   </div>
   <div class="col-md-12">
     <%= f.button "Submit", type: 'submit', class: 'btn btn-primary' %>
