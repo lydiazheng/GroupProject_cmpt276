@@ -23,8 +23,8 @@
         <p><%= @game.starts_at_time %></p>
       </div>
       <div class="col-sm-2">
-        <h4>DURATION(hours)</h4>
-        <p><%= @game.duration %></p>
+        <h4>DURATION</h4>
+        <p><%= @game.duration %> minutes</p>
       </div>
       <div class="col-sm-2">
         <h4>ORGANIZER</h4>
@@ -47,7 +47,7 @@
     <% if logged_in? && current_user.is_admin? %>
       <%= link_to 'Edit', edit_game_path(@game), class: 'btn btn-info' %> |
     <% end %>
-    <%= link_to 'Back', games_path, class: 'btn btn-info' %>
+    <%= link_to 'Back', games_path, class: 'btn btn-warning' %>
 
   </div>
 </div>
