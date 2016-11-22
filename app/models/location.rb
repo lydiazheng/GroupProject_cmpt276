@@ -1,7 +1,7 @@
 class Location < ActiveRecord::Base
   reverse_geocoded_by :latitude, :longitude, :address => :address
   after_validation :reverse_geocode  # auto-fetch address
-  has_many :hunts
+  has_many :hunts, dependent: :delete_all
   has_many :games, through: :hunts
 
   has_many :game_histories
