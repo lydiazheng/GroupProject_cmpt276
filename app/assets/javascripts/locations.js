@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   var marker;
   var map;
-  function initMap() {
+  function initLocationMap() {
     var locLat = parseFloat($('#location_latitude').val());
     var locLng = parseFloat($('#location_longitude').val());
     if (!locLat) {
@@ -36,7 +36,7 @@ $(document).ready(function() {
       $('#location_longitude').val(event.latLng.lng);
     });
   }
-  window.initMap = initMap;
+  window.initLocationMap = initLocationMap;
   // Adds a marker to the map.
   function addMarker(location, map) {
     marker.setMap(null);

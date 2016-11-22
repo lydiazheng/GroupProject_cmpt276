@@ -6,7 +6,7 @@ $(document).ready(function() {
 
   var marker;
   var map;
-  function initMap() {
+  function initGameMap() {
     var gameLat = parseFloat($('#game_latitude').val());
     var gameLng = parseFloat($('#game_longitude').val());
     if (!gameLat) {
@@ -37,7 +37,7 @@ $(document).ready(function() {
       getLocations();
     });
   }
-  window.initMap = initMap;
+  window.initGameMap = initGameMap;
   // Adds a marker to the map.
   function addMarker(location, map) {
     marker.setMap(null);
