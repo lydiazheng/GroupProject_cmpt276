@@ -9,7 +9,7 @@
       <th>Game address</th>
       <th>Start date</th>
       <th>Start time</th>
-      <th>Duration(hours)</th>
+      <th>Duration(min)</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -26,7 +26,7 @@
           <%= link_to 'Show', game, class: 'btn btn-info' %>
           <% if logged_in? && current_user.is_admin? %>
             <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-info' %>
-            <%= link_to 'Destroy', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Delete', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
           <%= link_to "Join Game", '#', class: 'btn btn-success' %>
         </td>
