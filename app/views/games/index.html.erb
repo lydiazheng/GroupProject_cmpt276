@@ -28,9 +28,11 @@
             <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-info' %>
             <%= link_to 'Delete', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
-          <%= link_to "Join Game", '#', class: 'btn btn-success' %>
+
+          <%= link_to "Join Game", user_path(current_user, :gid => game.id), class: "btn btn-success" %>
         </td>
       </tr>
+
     <% end %>
   </tbody>
 </table>
