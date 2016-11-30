@@ -49,6 +49,25 @@ class GamesController < ApplicationController
     redirect_to games_url 
   end
 
+  def add_histories
+    @game = Game.new
+    @user = params[:user_id]
+    @location = params[:location]
+    @hint1 = params[:hint1_used]
+    @hint2 = params[:hint2_used]
+    
+    @location.update_attribute(:user_id, current_user.id)
+    @location.update_attribute(:timestamp, DateTime.now.in_time_zone("Pacific Time (US & Canada)"))
+
+
+    redirect_to controller: 'users', action: 'show', id: @current_user.id
+  end
+
+
+
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game

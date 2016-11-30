@@ -29,21 +29,17 @@
                         <!-- SIDEBAR MENU -->
                         <div class="profile-usermenu">
                             <ul class="nav">
-                                <li class="active">
-                                	<a href="#"><i class="glyphicon glyphicon-home"></i> Game Rank</a>
+                                <li><a href="#"><i class="glyphicon glyphicon-home"></i> Game Rank</a>
                                 </li>
 
-                                <li>
-                                <%= link_to  :action => :history, :id => @user.id  do %>
-                                <i class="glyphicon glyphicon-ok"></i> Game history 
-                                <% end %>
-                                </li>
-                               
+                                <li class="active"><a href="#">
+                                <i class="glyphicon glyphicon-ok"></i> Game History
+                                </li></a>
+
                                 <li><%= link_to edit_user_path(current_user) do %>
                                 <i class="glyphicon glyphicon-cog"></i> Settings
                                 <% end %>
                                 </li>
-
                             </ul>
                         </div>
                         <!-- END MENU -->
@@ -55,17 +51,28 @@
 				<!-- Profile content -->
                 <div class="col-md-9">
                 <div class="profile-content text-center">
-                		<h2>Game Statements:<br></h2>
-                         <h1>Game Start!</h1>
+                		<h1>Game History: <br></h1>
 
+                         <div class="profile-usertitle-name">
+                         <% @user.games.each do |g| %>
+                                Game name: <%= g.title %> <br>
+                                Game address: <%= g.address %> <br>
+                                Game duration: <%= g.duration %> <br>
+                                Game start time: <%= g.starts_at_date %> <%= g.starts_at_time %> <br>
+                        <br>
+                        <% end %>
+                      
+                        </div>
+                        
+                        <br>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 <br>
 <br>
+
+
 
 </body>

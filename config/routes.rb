@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'users/edit'
   get 'users/update'
   get 'users/destroy'
+  get '/history', to: 'users#history'
 
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
