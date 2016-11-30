@@ -10,4 +10,6 @@ module GamesHelper
 	def get_game_duration(g_duration)
 		return Game.find_by(id: g_duration).duration
 	end
+
+	
 end

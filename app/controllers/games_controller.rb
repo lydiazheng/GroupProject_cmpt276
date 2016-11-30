@@ -53,15 +53,8 @@ class GamesController < ApplicationController
     @game = Game.new
     @user = params[:user_id]
 
-    
-    @location.update_attribute(:user_id, current_user.id)
-    @location.update_attribute(:timestamp, DateTime.now.in_time_zone("Pacific Time (US & Canada)"))
-
+    @game.update_attribute(:user_id, current_user.id)
   end
-
-
-
-
 
 
   private

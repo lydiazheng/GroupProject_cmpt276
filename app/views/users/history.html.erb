@@ -61,7 +61,8 @@
                                 Use hint1: <%= g.hint1_used %> <br>
                                 Use hint2: <%= g.hint2_used %> <br>
                                 The total time of the game: <%= get_game_duration(g.game_id) %><br>
-                                
+                                The start time: <%= g.created_at %> <br>
+                                The finish time: <%= g.updated_at %> <br>
                         <br>
                         <% end %>
                       
