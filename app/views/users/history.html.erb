@@ -1,5 +1,4 @@
 <% provide(:title, @user.username) %>
-
 <body class="user_show_page">
 
 <!-- Page Content -->
@@ -56,16 +55,16 @@
                 		<h1>Game History: <br></h1>
 
                          <div class="profile-usertitle-name">
-                         <% @user.games.each do |g| %>
-                                Game name: <%= g.title %> <br>
-                                Game address: <%= g.address %> <br>
-                                Game duration: <%= g.duration %> <br>
-                                Game start time: <%= g.starts_at_date %> <%= g.starts_at_time %> <br>
+                         <% @user.game_histories.each do |g| %>
+                                Game name: <%= g.game_id %> <br>
+                                Game address: <%= g.location_id %> <br>
+                                Use hint1: <%= g.hint1_used %> <br>
+                                Use hint2: <%= g.hint2_used %> <br>
                         <br>
                         <% end %>
                       
                         </div>
-                        
+
                         <br>
                     </div>
                 </div>
