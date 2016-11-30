@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if (params[:gid])
+    if (params[:gid] && !(Play.find_by(:user_id => current_user.id, :game_id => params[:gid])))
       Play.create(:user_id => current_user.id, :game_id => params[:gid])
     end
   end

@@ -11,6 +11,7 @@
       </ul>
     </div>
   <% end %>
+
   <div class="col-md-6">
     <%= f.text_field :title %>
     <%= f.number_field :duration, append: "min"%>
@@ -23,6 +24,8 @@
     <div class="form-group">
       <label class="control-label">Starting Point</label>
       <%= render 'map' %>
+
+      <!--<img src="http://api.openweathermap.org/data/2.5/forecast/daily?q=London&units=metric&cnt=7&APPID=60e071f8407f35905a9d5b8c992087bf">-->
     </div>
   </div>
   <div class="col-md-12" id="game-locations">
