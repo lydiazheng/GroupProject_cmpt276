@@ -56,7 +56,7 @@
 
                          <div class="profile-usertitle-name">
                          <% @user.game_histories.each do |g| %>
-                                Game name: <%= g.game_id %> <br>
+                                Game name: <%= get_game_name(g.game_id) %> <br>
                                 Game address: <%= g.location_id %> <br>
                                 Use hint1: <%= g.hint1_used %> <br>
                                 Use hint2: <%= g.hint2_used %> <br>
