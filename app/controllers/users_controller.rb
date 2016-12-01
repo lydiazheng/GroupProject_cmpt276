@@ -26,8 +26,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if (params[:gid] && !(Play.find_by(:user_id => current_user.id, :game_id => params[:gid])))
+    # when user click leave game bottom, it will execute the if statement and destroy the record in 
+    # play table
+    if (params[:gid] && params[:leave] && (Play.find_by(:user_id => current_user.id, :game_id => params[:gid])))
+      (Play.find_by(:user_id => current_user.id, :game_id => params[:gid])).destroy
+      
+      redirect_to games_path
+    #else if game id is passed and if not joined the game
+    elsif(params[:gid] && !(Play.find_by(:user_id => current_user.id, :game_id => params[:gid])))
       Play.create(:user_id => current_user.id, :game_id => params[:gid])
+      redirect_to games_path
     end
   end
 
