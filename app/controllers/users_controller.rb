@@ -48,6 +48,9 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def history
+    @user = User.find(params[:id])
+  end
 
   private
 

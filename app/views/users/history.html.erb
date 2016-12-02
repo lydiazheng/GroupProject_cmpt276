@@ -1,5 +1,4 @@
 <% provide(:title, @user.username) %>
-
 <body class="user_show_page">
 
 <!-- Page Content -->
@@ -29,20 +28,19 @@
                         <!-- SIDEBAR MENU -->
                         <div class="profile-usermenu">
                             <ul class="nav">
-                                <li class="active">
-                                	<a href="#"><i class="glyphicon glyphicon-home"></i> Game Page</a>
-                                </li>
-
-                                <li><%= link_to  :action => :history, :id => @user.id  do %>
-                                <i class="glyphicon glyphicon-ok"></i> Game History 
+                                <li><%= link_to  :action => :show, :id => @user.id  do %>
+                                <i class="glyphicon glyphicon-home"></i> Game Page</a>
                                 <% end %>
                                 </li>
-                               
+
+                                <li class="active"><a href="#">
+                                <i class="glyphicon glyphicon-ok"></i> Game History
+                                </li></a>
+
                                 <li><%= link_to edit_user_path(current_user) do %>
                                 <i class="glyphicon glyphicon-cog"></i> Settings
                                 <% end %>
                                 </li>
-
                             </ul>
                         </div>
                         <!-- END MENU -->
@@ -54,17 +52,31 @@
 				<!-- Profile content -->
                 <div class="col-md-9">
                 <div class="profile-content text-center">
-                		<h2>Game Statements:<br></h2>
-                         <h1>Game Start!</h1>
+                		<h1>Game History: <br></h1>
 
+                         <div class="profile-usertitle-name">
+                         <% @user.game_histories.each do |g| %>
+                                Game name: <%= get_game_name(g.game_id) %> <br>
+                                Game address: <%= get_game_address(g.location_id) %> <br>
+                                Use hint1: <%= g.hint1_used %> <br>
+                                Use hint2: <%= g.hint2_used %> <br>
+                                The total time of the game: <%= get_game_duration(g.game_id) %><br>
+                                The start time: <%= g.created_at %> <br>
+                                The finish time: <%= g.updated_at %> <br>
+                        <br>
+                        <% end %>
+                      
+                        </div>
+
+                        <br>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 <br>
 <br>
+
+
 
 </body>

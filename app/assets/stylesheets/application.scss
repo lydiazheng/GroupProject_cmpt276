@@ -22,7 +22,7 @@
 
 
 body {
-  padding-top: 60px;
+  padding-top: 50px;
 }
 
 section {
@@ -99,9 +99,9 @@ footer ul li {
 
 /* home */
 .jumbotron {
+  padding-top: 50px;
   background-color: #778899; /* LightSlateGrey  */
   color: #DCDCDC; /*  Gainsboro  */
-  padding: 100px 25px;
 }
 
 /* about */
@@ -279,6 +279,7 @@ width: 50%;
   margin-left: -2px;
 }
 
+
 /* Profile Content */
 .profile-content {
   padding: 20px;
@@ -374,4 +375,9 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+/* user edit*/
+#user_edit{
+  font-size: 14px;
 }
