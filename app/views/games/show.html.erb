@@ -3,7 +3,7 @@
     <h2>Information</h2>
     <h4>--Game--</h4>
     <br>
-    <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @game.latitude %>, <%= @game.longitude %>&zoom=13&size=600x400&maptype=roadmap&markers=color:red%7C<%= @game.latitude %>, <%= @game.longitude %>&key=<%= Rails.configuration.google_api_key %>">
+    <img class="google-static-map" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @game.latitude %>, <%= @game.longitude %>&zoom=14&size=600x400&maptype=roadmap&markers=color:red%7C<%= @game.latitude %>, <%= @game.longitude %>&key=<%= Rails.configuration.google_api_key %>">
     <br>
 
     <div class="row text-center" >
@@ -44,8 +44,8 @@
 
     <% else %>
         <%= link_to "Join Game", user_path(current_user, :gid => @game.id), class: "btn btn-success" %>
-    
-    
+
+
 
    <% end %>
 
