@@ -4,3 +4,9 @@ john:
   email: john@example.com
   firstname: John
   username: johnny_bravo
+  
+
+lydia:
+  email: lydia@example.com
+  firstname: Lydia
+  username: lydia_zheng
