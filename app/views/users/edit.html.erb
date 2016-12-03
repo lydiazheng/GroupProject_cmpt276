@@ -1,37 +1,104 @@
+
 <% provide(:title, "Edit user") %>
-<div>
-<h1 >Update your profile</h1>
 
-<div class="row" >
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
+<body class="user_show_page">
 
-      <%= f.label :username %>
-      <%= f.text_field :username, class: 'form-control' %>
+<!-- Page Content -->
+<div class="container">
+    <!-- First Featurette -->
+    <div class="featurette" id="about">
+        <div class="container">
+             <div class="row profile">
+                <div class="col-md-3">
+                    <div class="profile-sidebar">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic text-center">
+                            <%= gravatar_for @user %>
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                <%= @user.username %><br>
+                                E-mail: <%= @user.email %> <br>
+                                Firstname: <%= @user.firstname %><br>
+                                Lastname: <%= @user.lastname %><br>
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
 
-      <%= f.label :firstname %>
-      <%= f.text_field :firstname, class: 'form-control' %>
+                        <!-- SIDEBAR MENU -->
+                        <div class="profile-usermenu">
+                            <ul class="nav">
+                                <li><%= link_to  :action => :show, :id => @user.id  do %>
+                                <i class="glyphicon glyphicon-home"></i> Game Page</a>
+                                <% end %>
+                                </li>
 
-      <%= f.label :lastname %>
-      <%= f.text_field :lastname, class: 'form-control' %>
+                                <li><%= link_to  :action => :history, :id => @user.id  do %>
+                                <i class="glyphicon glyphicon-ok"></i> Game History 
+                                <% end %>
+                                </li>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+                                <li  class="active"><%= link_to edit_user_path(current_user) do %>
+                                <i class="glyphicon glyphicon-cog"></i> Settings
+                                <% end %>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END MENU -->
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control', id: 'password', data: { toggle: 'popover', trigger: 'hover', placement: 'top', content: 'Must be at least 6 characters and include uppercase and lowercase letters, digit and symbol.' } %>
+                    </div>
+                </div>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-      <%= f.submit "Save changes", class: "btn btn-primary" %>
-    <% end %>
+        <!-- Profile content -->
+                <div class="col-md-9">
+                <div class="profile-content text-center">
+                    <h1>Update your profile: <br></h1>
+                      <div class="row" >
+                        <div class="col-md-6 col-md-offset-3", id="user_edit">
+                        <%= form_for(@user) do |f| %>
+                          <%= render 'shared/error_messages' %>
 
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails" target="_blank">change</a>
-    </div>
-  </div>
-</div>
-</div>
+                          <%= f.label :username %>
+                          <%= f.text_field :username, class: 'form-control' %>
+
+                          <%= f.label :firstname %>
+                          <%= f.text_field :firstname, class: 'form-control' %>
+
+                          <%= f.label :lastname %>
+                          <%= f.text_field :lastname, class: 'form-control' %>
+
+                          <%= f.label :email %>
+                          <%= f.email_field :email, class: 'form-control' %>
+
+                          <%= f.label :password %>
+                          <%= f.password_field :password, class: 'form-control', id: 'password', data: { toggle: 'popover', trigger: 'hover', placement: 'top', content: 'Must be at least 6 characters and include uppercase and lowercase letters, digit and symbol.' } %>
+
+                          <%= f.label :password_confirmation, "Confirmation" %>
+                          <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+                          <%= f.submit "Save changes", class: "btn btn-primary" %>
+                        <% end %>
+
+                        <div class="gravatar_edit">
+                          <%= gravatar_for @user %>
+                          <a href="http://gravatar.com/emails" target="_blank">change</a>
+                        </div>
+                      </div>
+                    </div>
+                        </div>
+
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<br>
+<br>
+
+
+
+</body>
