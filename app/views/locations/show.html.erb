@@ -6,6 +6,7 @@
       <%= image_tag @location.image.url(:medium) %>
       <img class="google-static-map" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @location.latitude %>, <%= @location.longitude %>&zoom=14&size=400x400&maptype=roadmap&markers=color:red%7C<%= @location.latitude %>, <%= @location.longitude %>&key=<%= Rails.configuration.google_api_key %>">
     </div>
+    <br>
     <div class="row">
       <div class="col-sm-4">
         <span class="glyphicon glyphicon-resize-horizontal"></span>
