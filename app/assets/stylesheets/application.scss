@@ -66,6 +66,18 @@ textarea {
 .margin-page{
   margin-top: 60px;
 }
+.logo_image{
+  height: 180px;
+  width: 180px;
+  margin-top: -60px;
+  border-radius: 7px;
+  box-shadow: 0 0 5px 5px white;
+}
+.logo_image:hover{
+  border: none;
+  box-shadow: 0 0 5px black;
+}
+
 /* footer */
 
 footer {
