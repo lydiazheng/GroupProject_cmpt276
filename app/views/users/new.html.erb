@@ -4,6 +4,13 @@
 
 <div class="row panel-body">
   <div class="col-md-6 col-md-offset-3">
+
+    <%= link_to root_path do %>
+       <%= image_tag "logo.png", class: "logo_image_signup" %>
+    <% end %>
+    <br>
+    <br>
+
     <%= form_for(@user) do |f| %>
     <%= render 'shared/error_messages' %>
       <%= f.label :username %>
