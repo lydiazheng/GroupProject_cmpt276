@@ -6,28 +6,37 @@
     <img class="google-static-map" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @game.latitude %>, <%= @game.longitude %>&zoom=14&size=600x400&maptype=roadmap&markers=color:red%7C<%= @game.latitude %>, <%= @game.longitude %>&key=<%= Rails.configuration.google_api_key %>">
     <br>
     <br>
-    <div class="row text-center" >
-      <div class="col-sm-2">
+    <div class="row" >
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-certificate"></span>
         <h4>TITLE</h4>
         <p><%= @game.title %></p>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-home"></span>
         <h4>ADDRESS</h4>
         <p><%= @game.address %></p>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-time"></span>
         <h4>START DATE</h4>
         <p><%= @game.starts_at_date %></p>
       </div>
-      <div class="col-sm-2">
+      </div>
+    <br><br>
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-time"></span>
         <h4>START TIME</h4>
         <p><%= @game.starts_at_time %></p>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-leaf"></span>
         <h4>DURATION</h4>
         <p><%= @game.duration %> minutes</p>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-globe"></span>
         <h4>ORGANIZER</h4>
         <% if @game.organizer.present? %>
         <p>
