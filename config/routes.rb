@@ -16,13 +16,7 @@ Rails.application.routes.draw do
   get  '/about',   to: 'home_pages#about'
   resources :users
 
-  get 'users/new'
-  get 'users/index'
-  get 'users/create'
-  get 'users/show'
-  get 'users/edit'
-  get 'users/update'
-  get 'users/destroy'
+
 
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'

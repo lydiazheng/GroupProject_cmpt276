@@ -23,21 +23,49 @@
         <td><%= game.starts_at_time %></td>
         <td><%= game.duration %></td>
         <td>
-          <%= link_to 'Show', game, class: 'btn btn-info' %>
-          <% if logged_in? && current_user.is_admin? || current_user.id == game.organizer_id %>
-            <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-info' %>
-            <%= link_to 'Delete', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
+          <% if logged_in? && current_user.is_admin?  %>
+            <%= link_to 'Show', game, class: 'btn btn-info' %>
+              <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-info' %>
+              <%= link_to 'Delete', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+
 
           <% if (Play.find_by(:user_id => current_user.id, :game_id => game.id))%>
         <%= link_to "leave Game", user_path(current_user, :gid => game.id, :leave => game.id), class: "btn btn-danger" %>
 
-    <% else %>
-        <%= link_to "Join Game", user_path(current_user, :gid => game.id), class: "btn btn-success" %>
+          <% else %>
+            <%= link_to "Join Game", user_path(current_user, :gid => game.id), class: "btn btn-success" %>
+          <% end %>
 
+      
 
+          <!--if the user is not admin, if the game is passed, don't show the game. also
+        need to determine if the user is organizer -->
+          <% else %>
+            <!-- if the user is organizer and the game is not passed
+          the user can see show  edit and delete page-->
 
-   <% end %>
+            <% if logged_in? && get_game_start_datetime(game.id) > DateTime.now && current_user.id == game.organizer_id %>
+              <%= link_to 'Show', game, class: 'btn btn-info' %>
+              <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-info' %>
+              <%= link_to 'Delete', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+
+              <!-- the user is game organizer but the game has passed, can only see the show page of the game -->
+              <% elsif logged_in? && get_game_start_datetime(game.id) < DateTime.now && current_user.id == game.organizer_id %>
+                <%= link_to 'Show', game, class: 'btn btn-info' %>
+              <!-- elsif the user is not game organizer and the game is not passed, the user
+          can see the game show page and join or leave the game page  -->
+              <% elsif logged_in? && get_game_start_datetime(game.id) > DateTime.now && current_user.id != game.organizer_id %>
+                <%= link_to 'Show', game, class: 'btn btn-info' %>
+                <% if (Play.find_by(:user_id => current_user.id, :game_id => game.id))%>
+              <%= link_to "leave Game", user_path(current_user, :gid => game.id, :leave => game.id), class: "btn btn-danger" %>
+
+                <% else %>
+                  <%= link_to "Join Game", user_path(current_user, :gid => game.id), class: "btn btn-success" %>
+                <% end %>
+              <!-- else the user is not organizer and the game is passed, the user can see nothing -->
+              <% else %>
+              <% end %>
+       <% end %>
         </td>
       </tr>
 
