@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :games
+  get  '/play/:id',  to: 'game#play'
 
   get 'password_resets/new'
 

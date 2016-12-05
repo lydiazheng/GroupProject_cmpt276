@@ -1,5 +1,9 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  include GamesHelper
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :play]
+
+  #Only allow joined users to play game
+  before_action :is_joined, only: [:play]
 
   # GET /games
   def index
@@ -8,7 +12,6 @@ class GamesController < ApplicationController
 
   # GET /games/1
   def show
-    @game = Game.find(params[:id])
   end
 
   # GET /games/new
@@ -19,7 +22,6 @@ class GamesController < ApplicationController
 
   # GET /games/1/edit
   def edit
-    @game = Game.find(params[:id])
   end
 
   # POST /games
@@ -48,13 +50,26 @@ class GamesController < ApplicationController
   def destroy
     Game.find(params[:id]).destroy
     flash[:success] = 'Game was successfully destroyed.'
-    redirect_to games_url 
+    redirect_to games_url
+  end
+
+  # GET /games/play/1
+  def play
+    @game_start_datetime = get_game_start_datetime(params[:id])
+    @game_end_datetime = get_game_end_datetime(params[:id])
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
       @game = Game.find(params[:id])
+    end
+
+    def is_joined
+      if (logged_in? && Play.find_by(:user_id => current_user.id, :game_id => params[:id]))
+        return true
+      end
+      redirect_to games_url
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

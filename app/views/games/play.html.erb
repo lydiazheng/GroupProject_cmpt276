@@ -1,0 +1,50 @@
+
+
+now: <%= DateTime.now %> <br/>
+start: <%= @game_start_datetime %><br/>
+end: <%= @game_end_datetime %><br/>
+
+<% if @game_start_datetime > DateTime.now %>
+  <h1> <%= @game.title %> </h1>
+  <p>
+    This game has not started yet. Please check again at
+    <b><%= @game_start_datetime.strftime("%F @ %H:%M:%S") %></b>
+  </p>
+
+<% elsif @game_end_datetime < DateTime.now %>
+  <h1> <%= @game.title %> </h1>
+  <p>
+    This game has ended. You can check for more games <%= link_to 'here', games_path, class: 'btn btn-info' %>
+  </p>
+
+<% else%>
+  <div class="row">
+    <div class="col-md-6">
+      <h1>
+        <%= @game.title %>
+        <button id="js-game-start" type="button" class="btn btn-primary">
+          <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Play
+        </button>
+      </h1>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div id="clock"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+    <% @game.locations.all.each do |location| %>
+    <div class="col-sm-2">
+      <%= image_tag location.image.url(:thumb) %>
+    </div>
+    <% end %>
+  </div>
+
+<% end %>
+<script>
+$('#clock').countdown({until:new Date("<%=@game_end_datetime.utc.strftime("%FT%H:%M:%S")%>"), format: 'MS'})
+</script>
