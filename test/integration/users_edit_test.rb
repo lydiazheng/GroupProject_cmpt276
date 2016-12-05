@@ -6,8 +6,6 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user = users(:john)
   end
 
-  # Log in as a particular user.
-
 
 
 
