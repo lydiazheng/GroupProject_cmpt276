@@ -55,7 +55,7 @@
   opacity: 0.8;
   cursor: pointer;
   &:hover {
-    opacity: 1;  
+    opacity: 1;
   }
 }
 #js-play-locations {
@@ -65,4 +65,15 @@
   .js-location.active {
     display:block;
   }
+}
+.wrapper {
+  position: relative;
+}
+
+.wrapper .glyphicon {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 40px;
+  color:green;
 }

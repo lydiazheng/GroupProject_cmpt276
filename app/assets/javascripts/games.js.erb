@@ -90,4 +90,28 @@ $(document).ready(function() {
     }
   )
 
+  $('.js-hint').click(
+    function startGame(e) {
+      var $button = $(e.target);
+      var gameId = $button.data('gameid');
+      var locationId = $button.data('locationid');
+      var hintNumber = $button.data('hint');
+      var url = '/games/hint/' + gameId + '?lid=' + locationId +
+      '&hnum=' + hintNumber;
+      $.ajax({
+          type: 'GET',
+          dataType: 'json',
+          url: url,
+      }).done(function(data) {
+        var hintId = '#js-hint' + hintNumber + '-' + locationId;
+        $(hintId).html('<b>Hint ' + hintNumber + ':</b> ' + data.hint);
+        $button.hide();
+        //show_ajax_message(data.message, 'success');
+      })
+      .fail(function(data) {
+        show_ajax_message(data.message, 'alert');
+      });
+    });
+
+
 });

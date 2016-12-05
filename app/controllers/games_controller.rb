@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :play]
 
   #Only allow joined users to play game
-  before_action :is_joined, only: [:play, :start]
+  before_action :is_joined, only: [:play, :start, :hint]
 
   # GET /games
   def index
@@ -57,15 +57,19 @@ class GamesController < ApplicationController
   def play
     @game_start_datetime = get_game_start_datetime(params[:id])
     @game_end_datetime = get_game_end_datetime(params[:id])
-    @user_game_history = GameHistory.find_by(:user_id => current_user.id, :game_id => params[:id])
+    user_game_history = GameHistory.where(:user_id => current_user.id, :game_id => params[:id])
+    @has_history =  user_game_history.count > 0
+    @locations_history = {}
+    user_game_history.each do |his|
+      @locations_history[his.location_id] = { 'discovered': his.discovered,
+        'hint1_used': his.hint1_used, 'hint2_used': his.hint2_used}
+    end
   end
 
   def start
     game_id = params[:id]
     game = Game.find(game_id)
-    game_start_datetime = get_game_start_datetime(game_id)
-    game_end_datetime = get_game_end_datetime(game_id)
-    if game_start_datetime <= DateTime.now && game_end_datetime >= DateTime.now
+    if is_active_game(game_id)
       game.locations.all.each do |loc|
         GameHistory.create(user_id:current_user.id, game_id:game_id,
                            location_id:loc.id, discovered:false,
@@ -79,6 +83,39 @@ class GamesController < ApplicationController
     redirect_to controller: 'games', action: 'play', id:game_id
   end
 
+  def hint
+    game_id = params[:id]
+    location_id = params[:lid]
+    hint_number = params[:hnum]
+    game = Game.find(game_id)
+    if is_active_game(game_id)
+      game_history = GameHistory.find_by(user_id:current_user.id,
+                                         game_id:game_id, location_id:location_id)
+      user_play = Play.find_by(user_id:current_user.id, game_id:game_id)
+      location = Location.find(location_id)
+      if hint_number == '1'
+        game_history.hint1_used = true;
+        game_history.save
+
+        hint1_points = location.hint1_points
+        hint = location.hint1
+        user_play.points = user_play.points - hint1_points
+        user_play.save
+      elsif hint_number == '2'
+        game_history.hint2_used = true;
+        game_history.save
+
+        hint2_points = location.hint2_points
+        hint = location.hint2
+        user_play.points = user_play.points - hint2_points
+        user_play.save
+      end
+      render json: {message:'Hint Used', hint: hint}, status: 200
+    else
+      render json: {message:'Could not use hint, please makes sure you are playing the game at the correct time.'}, status: 400
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
@@ -90,6 +127,17 @@ class GamesController < ApplicationController
         return true
       end
       redirect_to games_url
+    end
+
+    def is_active_game(game_id)
+      game = Game.find(game_id)
+      game_start_datetime = get_game_start_datetime(game_id)
+      game_end_datetime = get_game_end_datetime(game_id)
+      if game_start_datetime <= DateTime.now && game_end_datetime >= DateTime.now
+        return true
+      else
+        return false
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

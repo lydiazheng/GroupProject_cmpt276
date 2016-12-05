@@ -30,7 +30,7 @@
     <div class="col-md-6">
       <h2>
         <%= @game.title %>
-        <% if @user_game_history %>
+        <% if @has_history %>
           (playing...)
         <% else %>
           <a href="/games/start/<%=@game.id%>" data-gameid="<%=@game.id%>" class="btn btn-primary">
@@ -51,11 +51,16 @@
   <div class="row show-grid highlight">
     <% @game.locations.all.each do |location| %>
     <div class="col-sm-2">
-      <%= image_tag location.image.url(:thumb), data: {locationid:location.id},  class:"js-location-choice"%>
+      <div class="wrapper">
+        <%= image_tag location.image.url(:thumb), data: {locationid:location.id},  class:"js-location-choice"%>
+        <% if @has_history && @locations_history[location.id][:discovered]%>
+          <span class="glyphicon glyphicon-ok js-location-choice" data-locationid="<%=location.id%>"></span>
+        <% end %>
+      </div>
     </div>
     <% end %>
   </div>
-  <% if @user_game_history %>
+  <% if @has_history %>
     <div id="js-play-locations">
       <div class="row show-grid highlight">
         <% @game.locations.all.each do |location| %>
@@ -69,20 +74,32 @@
                   <%=location.description %>
                 </div>
                 <div class="col-md-12 show-grid">
-                  <button type="button" data-gameid="<%=@game.id%>" class="btn btn-info">
-                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Use Hint
-                  </button>
-                  <span id="hint1-<%=location.id %>"> Using this hint costs <%= location.hint1_points%> point(s)</span>
+                  <% if @locations_history[location.id][:hint1_used]%>
+                    <span id="js-hint1-<%=location.id %>"><b>Hint 1:</b> <%= location.hint1%></span>
+                  <% else %>
+                    <button type="button" data-hint=1 data-gameid="<%=@game.id%>"  data-locationid="<%=location.id %>"class="btn btn-info js-hint">
+                      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Use Hint
+                    </button>
+                    <span id="js-hint1-<%=location.id %>"> Using this hint costs <%= location.hint1_points%> point(s)</span>
+                  <% end %>
                 </div>
                 <div class="col-md-12 show-grid">
-                  <button type="button" data-gameid="<%=@game.id%>" class="btn btn-info">
-                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Use Hint
-                  </button>
-                  <span id="hint2-<%=location.id %>">Using this hint costs <%= location.hint1_points%> point(s)</span>
+                  <% if @locations_history[location.id][:hint2_used]%>
+                    <span id="js-hint2-<%=location.id %>"><b>Hint 2:</b> <%= location.hint2%></span>
+                  <% else %>
+                    <button type="button" data-hint=2 data-gameid="<%=@game.id%>" data-locationid="<%=location.id %>" class="btn btn-info js-hint">
+                      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Use Hint
+                    </button>
+                    <span id="js-hint2-<%=location.id %>"> Using this hint costs <%= location.hint2_points%> point(s)</span>
+                  <% end %>
                 </div>
                 <div class="col-md-12 show-grid">
-                  <button class="js-location-found btn btn-success btn-lg" type="button" data-locationid="<%=location.id %>" style="width:100%;"> Found It!
-                  </button>
+                  <% if @locations_history[location.id][:discovered]%>
+                    <b> Already Discovered! </b>
+                  <% else %>
+                    <button class="js-location-found btn btn-success btn-lg" type="button" data-locationid="<%=location.id %>" style="width:100%;"> Found It!
+                    </button>
+                  <% end %>
                 </div>
               </div>
             </div>
