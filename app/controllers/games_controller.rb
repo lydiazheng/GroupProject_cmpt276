@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :play]
 
   #Only allow joined users to play game
-  before_action :is_joined, only: [:play, :start, :hint]
+  before_action :is_joined, only: [:play, :start, :hint, :discover, :history]
 
   # GET /games
   def index
@@ -60,7 +60,7 @@ class GamesController < ApplicationController
     user_game_history = GameHistory.where(:user_id => current_user.id, :game_id => params[:id])
     @has_history =  user_game_history.count == @game.locations.all.count
     @found_all = !GameHistory.exists?(user_id:current_user.id, game_id:params[:id], discovered:false)
-    @players_info = Play.where(game_id:params[:id]).order(points: :desc) 
+    @players_info = Play.where(game_id:params[:id]).order(points: :desc)
     @locations_history = {}
     user_game_history.each do |his|
       @locations_history[his.location_id] = { 'discovered': his.discovered,
@@ -68,6 +68,7 @@ class GamesController < ApplicationController
     end
   end
 
+  # GET /games/start/1
   def start
     game_id = params[:id]
     game = Game.find(game_id)
@@ -84,6 +85,7 @@ class GamesController < ApplicationController
     redirect_to controller: 'games', action: 'play', id:game_id
   end
 
+  # GET /games/hint/1
   def hint
     game_id = params[:id]
     location_id = params[:lid]
@@ -117,6 +119,7 @@ class GamesController < ApplicationController
     end
   end
 
+  # GET /games/discover/1
   def discover
     game_id = params[:id]
     location_id = params[:lid]
@@ -139,6 +142,7 @@ class GamesController < ApplicationController
         if !GameHistory.exists?(user_id:current_user.id, game_id:game_id, discovered:false)
           # add points for first 3 players
           finished_players = Play.where(game_id:game_id).where.not(finish_time: nil)
+          user_play.rank = finished_players.count + 1
           if finished_players.count <= 2
             user_play.points = user_play.points + ((finished_players.count - 3) * -2)
           end
@@ -152,6 +156,17 @@ class GamesController < ApplicationController
     else
       render json: {message:'Could not find location, please makes sure you are playing the game at the correct time.'}, status: 400
     end
+  end
+
+  # GET /games/history/1
+  def history
+    game_id = params[:id]
+    @game = Game.find(game_id)
+    @game_start_datetime = get_game_start_datetime(game_id)
+    @user_game_history = GameHistory.where(user_id:current_user.id, game_id:game_id)
+    @found_all = !GameHistory.exists?(user_id:current_user.id, game_id:game_id, discovered:false)
+    @user_play = Play.find_by(user_id:current_user.id, game_id:game_id)
+    @players_info = Play.where(game_id:game_id).order(points: :desc)
   end
 
   private

@@ -1,0 +1,104 @@
+<h2> <%= @game.title %> History</h2
+<!-- Game not started yet -->
+<% if @game_start_datetime > DateTime.now %>
+  <div class="row">
+    <div class="col-md-12">
+      <p>
+        This game has not started yet. Please check again at
+        <b><%= @game_start_datetime.strftime("%F @ %H:%M:%S") %></b>
+      </p>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-md-8">
+      <h3> Your Game Stats </h3>
+      <table id="js-histoty-dt" class="table table-condensed table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>location</th>
+            <th>Hint 1 Used</th>
+            <th>Hint 2 Used</th>
+            <th>Final Point</th
+          </tr>
+        </thead>
+        <tbody>
+          <% @user_game_history.each do |history| %>
+            <% @location = Location.find(history.location_id) %>
+            <% @point_count = 0 %>
+            <tr>
+              <td>
+                <div class="wrapper">
+                  <%= image_tag @location.image.url(:thumb) %>
+                  <% if history.discovered %>
+                    <% @point_count = @location.points %>
+                    <span class="glyphicon glyphicon-ok js-location-choice"></span>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <% if history.hint1_used%>
+                  Yes: -<%=@location.hint1_points %> point(s)
+                  <% @point_count = @point_count - @location.hint1_points %>
+                <% else %>
+                  No
+                <% end %>
+              </td>
+              <td>
+                <% if history.hint2_used%>
+                  Yes (- <%=@location.hint2_points %>)
+                  <% @point_count = @point_count - @location.hint2_points %>
+                <% else %>
+                  No
+                <% end %>
+              </td>
+              <td>
+                <%=@point_count %>
+              </td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="3">
+              Top 3 Finish bonus:
+              <% if @user_play.rank && @user_play.rank <= 3%>
+                <%= (@user_play.rank - 4) * -2 %>
+              <% else %>
+                0
+              <% end %>
+            </td>
+            <td colspan="1">
+              Total: <%= @user_play.points %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h3> Players Stats </h3>
+      <table id="js-player-dt" class="table table-condensed table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Points</th>
+            <th>Finished</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @players_info.each do |play| %>
+            <tr>
+              <td><%= User.find(play.user_id).username %></td>
+              <td><%= play.points %></td>
+              <td>
+                <% if play.finish_time==nil %>
+                  No
+                <% else %>
+                  Yes
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
