@@ -46,7 +46,7 @@ class GamesController < ApplicationController
 
   # DELETE /games/1
   def destroy
-    @game.destroy
+    Game.find(params[:id]).destroy
     flash[:success] = 'Game was successfully destroyed.'
     redirect_to games_url 
   end

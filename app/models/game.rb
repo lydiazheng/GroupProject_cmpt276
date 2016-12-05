@@ -5,11 +5,13 @@ class Game < ActiveRecord::Base
   has_many :hunts, dependent: :delete_all
   has_many :locations, through: :hunts
 
-  has_many :plays
+  has_many :plays, dependent: :delete_all
   has_many :users, through: :plays
 
   has_many :game_histories
 
   reverse_geocoded_by :latitude, :longitude, :address => :address
   after_validation :reverse_geocode  # auto-fetch address
+
+  
 end
