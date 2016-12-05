@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   resources :games
   get  '/play/:id', to: 'game#play'
   get  '/start/:id', to: 'game#start'
-  get  '/hint/:id', to:'game#hint'      
+  get  '/hint/:id', to:'game#hint'
+  get  '/discover/:id', to:'game#discover'
 
   get 'password_resets/new'
 

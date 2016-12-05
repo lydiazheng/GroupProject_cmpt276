@@ -91,7 +91,7 @@ $(document).ready(function() {
   )
 
   $('.js-hint').click(
-    function startGame(e) {
+    function(e) {
       var $button = $(e.target);
       var gameId = $button.data('gameid');
       var locationId = $button.data('locationid');
@@ -109,9 +109,60 @@ $(document).ready(function() {
         //show_ajax_message(data.message, 'success');
       })
       .fail(function(data) {
-        show_ajax_message(data.message, 'alert');
+        show_ajax_message(data.responseJSON.message, 'danger');
       });
     });
 
+  $('.js-location-found').click(
+    function(e) {
+      var findLocation = function(position) {
+        var gameId = $button.data('gameid');
+        var locationId = $button.data('locationid');
+        var url = '/games/discover/' + gameId + '?lid=' + locationId +
+        '&lat=' + position.coords.latitude + '&lng=' + position.coords.longitude;
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: url,
+        }).done(function(data) {
+          show_ajax_message('Location Found!', 'success');
+          location.reload();
+        })
+        .fail(function(data) {
+          show_ajax_message(data.responseJSON.message, 'danger');
+        })
+        .always(function() {
+          $button.html('Found It!');
+          $button.prop('disabled', false);
+        });
+      }
 
+      var showNavigatorError = function (error) {
+        $button.html('Found It!');
+        $button.prop('disabled', false);
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            show_ajax_message("User denied the request for Geolocation.", 'danger');
+            break;
+          case error.POSITION_UNAVAILABLE:
+            show_ajax_message("Location information is unavailable.", 'danger');
+            break;
+          case error.TIMEOUT:
+            show_ajax_message("The request to get user location timed out.", 'danger');
+            break;
+          case error.UNKNOWN_ERROR:
+            show_ajax_message("An unknown error occurred.", 'danger');
+            break;
+        }
+      }
+
+      var $button = $(e.target);
+      if (navigator.geolocation) {
+        $button.html('Checking...');
+        $button.prop('disabled', true);
+        navigator.geolocation.getCurrentPosition(findLocation, showNavigatorError);
+      } else {
+        show_ajax_message("Geolocation is not supported by this browser.", 'fail');
+      }
+    });
 });

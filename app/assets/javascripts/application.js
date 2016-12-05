@@ -25,13 +25,13 @@ $(document).ready(function() {
 
 $(function() {
    $('.alert').delay(500).fadeIn('normal', function() {
-      $(this).delay(2500).fadeOut();
+      $(this).delay(3500).fadeOut();
    });
 });
 
 var fade_alert = function() {
   $('.alert').delay(500).fadeIn('normal', function() {
-     $(this).delay(2500).fadeOut();
+     $(this).delay(3500).fadeOut();
   });
 };
 fade_alert();

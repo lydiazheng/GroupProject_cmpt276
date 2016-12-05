@@ -58,7 +58,8 @@ class GamesController < ApplicationController
     @game_start_datetime = get_game_start_datetime(params[:id])
     @game_end_datetime = get_game_end_datetime(params[:id])
     user_game_history = GameHistory.where(:user_id => current_user.id, :game_id => params[:id])
-    @has_history =  user_game_history.count > 0
+    @has_history =  user_game_history.count == @game.locations.all.count
+    @found_all = !GameHistory.exists?(user_id:current_user.id, game_id:params[:id], discovered:false)
     @locations_history = {}
     user_game_history.each do |his|
       @locations_history[his.location_id] = { 'discovered': his.discovered,
@@ -76,9 +77,8 @@ class GamesController < ApplicationController
                            hint1_used:false, hint2_used:false)
 
       end
-      flash[:success] = 'Game Started'
     else
-      flash[:fail] = 'Game cannot start, please makes sure you are playing the game at the correct time'
+      flash[:danger] = 'Game cannot start, please makes sure you are playing the game at the correct time'
     end
     redirect_to controller: 'games', action: 'play', id:game_id
   end
@@ -113,6 +113,43 @@ class GamesController < ApplicationController
       render json: {message:'Hint Used', hint: hint}, status: 200
     else
       render json: {message:'Could not use hint, please makes sure you are playing the game at the correct time.'}, status: 400
+    end
+  end
+
+  def discover
+    game_id = params[:id]
+    location_id = params[:lid]
+    lat = Float(params[:lat])
+    lng = Float(params[:lng])
+    game = Game.find(game_id)
+    if is_active_game(game_id)
+      game_history = GameHistory.find_by(user_id:current_user.id,
+                                         game_id:game_id, location_id:location_id)
+      user_play = Play.find_by(user_id:current_user.id, game_id:game_id)
+      location = Location.find(location_id)
+      distance = location.distance_from([lat,lng])
+      if distance <=3
+        game_history.discovered = true;
+        game_history.save
+
+        points = location.points
+        user_play.points = user_play.points + points
+        user_play.save
+        if !GameHistory.exists?(user_id:current_user.id, game_id:game_id, discovered:false)
+          # add points for first 3 players
+          finished_players = Play.where(game_id:game_id).where.not(finish_time: nil)
+          if finished_players.count <= 2
+            user_play.points = user_play.points + ((finished_players.count - 3) * -2)
+          end
+          user_play.finish_time = DateTime.now
+          user_play.save
+        end
+        render json: {message:'Location Found!'}, status: 200
+      else
+        render json: {message:'Unsuccessful Dicovery, try again.'}, status: 400
+      end
+    else
+      render json: {message:'Could not find location, please makes sure you are playing the game at the correct time.'}, status: 400
     end
   end
 
