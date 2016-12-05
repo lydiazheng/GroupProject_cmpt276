@@ -27,6 +27,8 @@ gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', '~> 3.4.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+gem 'jquery-countdown-rails'
 # Turbolinks makes following links zin your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

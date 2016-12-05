@@ -1,0 +1,162 @@
+<!-- Game not started yet -->
+<% if @game_start_datetime > DateTime.now %>
+  <h2> <%= @game.title %> </h2>
+  <p>
+    This game has not started yet. Please check again at
+    <b><%= @game_start_datetime.strftime("%F @ %H:%M:%S") %></b>
+  </p>
+
+<!-- Game ended-->
+<% elsif @game_end_datetime < DateTime.now %>
+  <div class="row">
+    <div class="col-md-12">
+      <h2> <%= @game.title %> </h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        This game has ended. Click more games to check future games. <br/>
+        <%= link_to 'More Games', games_path, class:"btn btn-primary show-grid " %></b>
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default" style="border-color:crimson; color: crimson;">
+        <div class="panel-body">
+          <div id="clock"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3> Player Stats </h3>
+      <table id="js-player-dt" class="table table-condensed table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Points</th>
+            <th>Finished</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @players_info.each do |play| %>
+            <tr>
+              <td><%= User.find(play.user_id).username %></td>
+              <td><%= play.points %></td>
+              <td>
+                <% if play.finish_time==nil %>
+                  No
+                <% else %>
+                  Yes
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<!-- Game ready to play-->
+<% else%>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>
+        <%= @game.title %>
+        <% if @has_history %>
+          <% if @found_all %>
+            <span style="color:green">(You are Done!)</span>
+          <% else %>
+            <span style="color:deepskyblue">(Playing...)</span>
+          <% end %>
+
+        <% else %>
+          <a href="/games/start/<%=@game.id%>" data-gameid="<%=@game.id%>" class="btn btn-primary">
+            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Play
+          </a>
+        <% end %>
+      </h2>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div id="clock"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row show-grid highlight">
+    <% @game.locations.all.each do |location| %>
+    <div class="col-sm-2">
+      <div class="wrapper">
+        <%= image_tag location.image.url(:thumb), data: {locationid:location.id},  class:"js-location-choice"%>
+        <% if @has_history && @locations_history[location.id][:discovered]%>
+          <span class="glyphicon glyphicon-ok js-location-choice" data-locationid="<%=location.id%>"></span>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% if @has_history %>
+    <div id="js-play-locations">
+      <div class="row show-grid highlight">
+        <% @game.locations.all.each do |location| %>
+          <div class="js-location" id="js-location-<%=location.id %>">
+            <div class="col-md-6">
+              <%= image_tag location.image.url(:medium) %>
+            </div>
+            <div class="col-md-6">
+              <div class="row show-grid">
+                <div class="col-md-12 show-grid">
+                  <%=location.description %>
+                </div>
+                <% if !@locations_history[location.id][:discovered]%>
+                  <div class="col-md-12 show-grid">
+                    <% if @locations_history[location.id][:hint1_used]%>
+                      <span id="js-hint1-<%=location.id %>"><b>Hint 1:</b> <%= location.hint1%></span>
+                    <% else %>
+                      <button type="button" data-hint=1 data-gameid="<%=@game.id%>"  data-locationid="<%=location.id %>"class="btn btn-info js-hint">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Use Hint
+                      </button>
+                      <span id="js-hint1-<%=location.id %>"> Using this hint costs <%= location.hint1_points%> point(s)</span>
+                    <% end %>
+                  </div>
+                  <div class="col-md-12 show-grid">
+                    <% if @locations_history[location.id][:hint2_used]%>
+                      <span id="js-hint2-<%=location.id %>"><b>Hint 2:</b> <%= location.hint2%></span>
+                    <% else %>
+                      <button type="button" data-hint=2 data-gameid="<%=@game.id%>" data-locationid="<%=location.id %>" class="btn btn-info js-hint">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Use Hint
+                      </button>
+                      <span id="js-hint2-<%=location.id %>"> Using this hint costs <%= location.hint2_points%> point(s)</span>
+                    <% end %>
+                  </div>
+                <% end %>
+                <div class="col-md-12 show-grid">
+                  <% if @locations_history[location.id][:discovered]%>
+                    <b> Already Discovered! </b>
+                  <% else %>
+                    <button class="js-location-found btn btn-success btn-lg" type="button" data-gameid="<%=@game.id%>" data-locationid="<%=location.id %>" style="width:100%;"> Found It!
+                    </button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>
+<script>
+$('#clock').countdown({
+  until:new Date("<%=@game_end_datetime.utc.strftime("%FT%H:%M:%S")%>"),
+  format: 'MS',
+  onExpiry: function() {
+    location.reload();
+  }
+})
+</script>

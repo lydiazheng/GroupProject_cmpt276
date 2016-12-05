@@ -4,6 +4,12 @@
 .ui-datepicker {
   z-index: 100 !important;
 }
+.is-countdown {
+  height: 70px;
+  font-size: 21px;
+  font-weight: 300;
+  line-height: 1.4;
+}
 
 #game-locations {
   background-color: #eee;
@@ -43,4 +49,31 @@
 .js-gm-loc.disabled {
   color: grey;
   opacity: 0.5;
+}
+
+.js-location-choice {
+  opacity: 0.8;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+}
+#js-play-locations {
+  .js-location {
+    display:none;
+  }
+  .js-location.active {
+    display:block;
+  }
+}
+.wrapper {
+  position: relative;
+}
+
+.wrapper .glyphicon {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 40px;
+  color:green;
 }

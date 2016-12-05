@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.countdown
 //= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
@@ -21,3 +22,21 @@
 $(document).ready(function() {
   $('#password').popover();
 });
+
+$(function() {
+   $('.alert').delay(500).fadeIn('normal', function() {
+      $(this).delay(3500).fadeOut();
+   });
+});
+
+var fade_alert = function() {
+  $('.alert').delay(500).fadeIn('normal', function() {
+     $(this).delay(3500).fadeOut();
+  });
+};
+fade_alert();
+
+var show_ajax_message = function(msg, type) {
+    $("#alert-message").html('<div class="alert alert-'+type+'">'+msg+'</div>');
+    fade_alert();
+};
