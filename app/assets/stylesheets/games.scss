@@ -50,3 +50,19 @@
   color: grey;
   opacity: 0.5;
 }
+
+.js-location-choice {
+  opacity: 0.8;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;  
+  }
+}
+#js-play-locations {
+  .js-location {
+    display:none;
+  }
+  .js-location.active {
+    display:block;
+  }
+}

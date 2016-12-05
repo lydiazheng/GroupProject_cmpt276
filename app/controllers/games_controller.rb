@@ -72,10 +72,11 @@ class GamesController < ApplicationController
                            hint1_used:false, hint2_used:false)
 
       end
-      render json: {message:'Game Started'}, status: 200
+      flash[:success] = 'Game Started'
     else
-      render json: {message:'Game cannot start, please makes sure you are playing the game at the correct time.'}, status: 400
+      flash[:fail] = 'Game cannot start, please makes sure you are playing the game at the correct time'
     end
+    redirect_to controller: 'games', action: 'play', id:game_id
   end
 
   private

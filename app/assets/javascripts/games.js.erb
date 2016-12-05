@@ -80,22 +80,14 @@ $(document).ready(function() {
     });
   };
 
-  $('#js-game-start').click(
-    function startGame() {
-      var gameId = $('#js-game-start').data('gameid')
-      var url = '/games/start/' + gameId
-      $.ajax({
-          type: 'GET',
-          dataType: 'json',
-          url: url,
-      }).done(function(data) {
-        $('#js-game-start').remove();
-        $('#js-game-playing').show();
-        show_ajax_message(data.message, 'success')
-      })
-      .fail(function() {
-        show_ajax_message(data.message, 'alert')
-      });
-    });
+  $('.js-location:first').addClass('active');
+
+  $('.js-location-choice').click(
+    function(e) {
+      $('.js-location').removeClass('active');
+      var locationId = $(e.target).data('locationid');
+      $('#js-location-' + locationId).addClass('active');
+    }
+  )
 
 });

@@ -23,15 +23,20 @@ $(document).ready(function() {
   $('#password').popover();
 });
 
-var fade_flash = function() {
-    $(".alert-notice").delay(5000).fadeOut(1000);
-    $(".alert-alert").delay(5000).fadeOut(1000);
-    $(".alert-error").delay(5000).fadeOut(1000);
-    $(".alert-success").delay(5000).fadeOut(1000);
+$(function() {
+   $('.alert').delay(500).fadeIn('normal', function() {
+      $(this).delay(2500).fadeOut();
+   });
+});
+
+var fade_alert = function() {
+  $('.alert').delay(500).fadeIn('normal', function() {
+     $(this).delay(2500).fadeOut();
+  });
 };
-fade_flash();
+fade_alert();
 
 var show_ajax_message = function(msg, type) {
-    $("#flash-message").html('<div class="alert alert-'+type+'">'+msg+'</div>');
-    fade_flash();
+    $("#alert-message").html('<div class="alert alert-'+type+'">'+msg+'</div>');
+    fade_alert();
 };

@@ -33,10 +33,9 @@
         <% if @user_game_history %>
           (playing...)
         <% else %>
-          <button id="js-game-start" type="button" data-gameid="<%=@game.id%>" class="btn btn-primary">
+          <a href="/games/start/<%=@game.id%>" data-gameid="<%=@game.id%>" class="btn btn-primary">
             <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Play
-          </button>
-          <span id="js-game-playing" style="display:none;">(playing...)</span>
+          </a>
         <% end %>
       </h2>
     </div>
@@ -48,14 +47,50 @@
       </div>
     </div>
   </div>
-  <div class="row">
 
+  <div class="row show-grid highlight">
     <% @game.locations.all.each do |location| %>
     <div class="col-sm-2">
-      <%= image_tag location.image.url(:thumb) %>
+      <%= image_tag location.image.url(:thumb), data: {locationid:location.id},  class:"js-location-choice"%>
     </div>
     <% end %>
   </div>
+  <% if @user_game_history %>
+    <div id="js-play-locations">
+      <div class="row show-grid highlight">
+        <% @game.locations.all.each do |location| %>
+          <div class="js-location" id="js-location-<%=location.id %>">
+            <div class="col-md-6">
+              <%= image_tag location.image.url(:medium) %>
+            </div>
+            <div class="col-md-6">
+              <div class="row show-grid">
+                <div class="col-md-12 show-grid">
+                  <%=location.description %>
+                </div>
+                <div class="col-md-12 show-grid">
+                  <button type="button" data-gameid="<%=@game.id%>" class="btn btn-info">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Use Hint
+                  </button>
+                  <span id="hint1-<%=location.id %>"> Using this hint costs <%= location.hint1_points%> point(s)</span>
+                </div>
+                <div class="col-md-12 show-grid">
+                  <button type="button" data-gameid="<%=@game.id%>" class="btn btn-info">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Use Hint
+                  </button>
+                  <span id="hint2-<%=location.id %>">Using this hint costs <%= location.hint1_points%> point(s)</span>
+                </div>
+                <div class="col-md-12 show-grid">
+                  <button class="js-location-found btn btn-success btn-lg" type="button" data-locationid="<%=location.id %>" style="width:100%;"> Found It!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
 <% end %>
 <script>
