@@ -9,10 +9,15 @@
 <!-- Game ended-->
 <% elsif @game_end_datetime < DateTime.now %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <h2> <%= @game.title %> </h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
       <p>
-        This game has ended. You can check for more games <%= link_to 'here', games_path, class: 'btn btn-info' %>
+        This game has ended. Click more games to check future games. <br/>
+        <%= link_to 'More Games', games_path, class:"btn btn-primary show-grid " %></b>
       </p>
     </div>
     <div class="col-md-6">
@@ -21,6 +26,35 @@
           <div id="clock"></div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3> Player Stats </h3>
+      <table id="js-player-dt" class="table table-condensed table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Points</th>
+            <th>Finished</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @players_info.each do |play| %>
+            <tr>
+              <td><%= User.find(play.user_id).username %></td>
+              <td><%= play.points %></td>
+              <td>
+                <% if play.finish_time==nil %>
+                  No
+                <% else %>
+                  Yes
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 

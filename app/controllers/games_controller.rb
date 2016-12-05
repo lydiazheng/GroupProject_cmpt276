@@ -60,6 +60,7 @@ class GamesController < ApplicationController
     user_game_history = GameHistory.where(:user_id => current_user.id, :game_id => params[:id])
     @has_history =  user_game_history.count == @game.locations.all.count
     @found_all = !GameHistory.exists?(user_id:current_user.id, game_id:params[:id], discovered:false)
+    @players_info = Play.where(game_id:params[:id]).order(points: :desc) 
     @locations_history = {}
     user_game_history.each do |his|
       @locations_history[his.location_id] = { 'discovered': his.discovered,
