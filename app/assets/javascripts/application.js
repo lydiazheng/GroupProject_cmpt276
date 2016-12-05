@@ -22,3 +22,16 @@
 $(document).ready(function() {
   $('#password').popover();
 });
+
+var fade_flash = function() {
+    $(".alert-notice").delay(5000).fadeOut(1000);
+    $(".alert-alert").delay(5000).fadeOut(1000);
+    $(".alert-error").delay(5000).fadeOut(1000);
+    $(".alert-success").delay(5000).fadeOut(1000);
+};
+fade_flash();
+
+var show_ajax_message = function(msg, type) {
+    $("#flash-message").html('<div class="alert alert-'+type+'">'+msg+'</div>');
+    fade_flash();
+};

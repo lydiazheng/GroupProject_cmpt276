@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :play]
 
   #Only allow joined users to play game
-  before_action :is_joined, only: [:play]
+  before_action :is_joined, only: [:play, :start]
 
   # GET /games
   def index
@@ -57,6 +57,25 @@ class GamesController < ApplicationController
   def play
     @game_start_datetime = get_game_start_datetime(params[:id])
     @game_end_datetime = get_game_end_datetime(params[:id])
+    @user_game_history = GameHistory.find_by(:user_id => current_user.id, :game_id => params[:id])
+  end
+
+  def start
+    game_id = params[:id]
+    game = Game.find(game_id)
+    game_start_datetime = get_game_start_datetime(game_id)
+    game_end_datetime = get_game_end_datetime(game_id)
+    if game_start_datetime <= DateTime.now && game_end_datetime >= DateTime.now
+      game.locations.all.each do |loc|
+        GameHistory.create(user_id:current_user.id, game_id:game_id,
+                           location_id:loc.id, discovered:false,
+                           hint1_used:false, hint2_used:false)
+
+      end
+      render json: {message:'Game Started'}, status: 200
+    else
+      render json: {message:'Game cannot start, please makes sure you are playing the game at the correct time.'}, status: 400
+    end
   end
 
   private

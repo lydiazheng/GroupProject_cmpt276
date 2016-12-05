@@ -73,11 +73,29 @@ $(document).ready(function() {
             var div = locDivs[j];
             if ($.inArray(div.id,locationDivIds) < 0){
               $(div).addClass('disabled')
-              $(div).find(':checkbox').prop("disabled", true)
+              $(div).find(':checkbox').prop('disabled', true)
             }
           }
         }
     });
   };
+
+  $('#js-game-start').click(
+    function startGame() {
+      var gameId = $('#js-game-start').data('gameid')
+      var url = '/games/start/' + gameId
+      $.ajax({
+          type: 'GET',
+          dataType: 'json',
+          url: url,
+      }).done(function(data) {
+        $('#js-game-start').remove();
+        $('#js-game-playing').show();
+        show_ajax_message(data.message, 'success')
+      })
+      .fail(function() {
+        show_ajax_message(data.message, 'alert')
+      });
+    });
 
 });
