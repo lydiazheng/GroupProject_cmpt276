@@ -26,7 +26,7 @@ class LocationTest < ActiveSupport::TestCase
      assert_not @location.valid?, "#{valid_longitude.inspect} should be valid"
    end
  end
-  
+
   test "the latitude can't be absent" do
     @location.latitude = "     "
     assert_not @location.valid?
@@ -54,7 +54,7 @@ class LocationTest < ActiveSupport::TestCase
     assert @location.valid?, "#{valid_address.inspect} should be valid"
   end
 end
-  
+
   test "description can not absent" do
     @location.description = "      "
     assert_not @location.valid?
@@ -72,7 +72,7 @@ end
 end
 
   test "description can not too larger" do
-    @location.description = "a" * 65
+    @location.description = "a" * 1025
     assert_not @location.valid?
   end
 
@@ -104,7 +104,7 @@ end
     @location.hint1_points = 0
     assert_not @location.valid?
   end
-  
+
   test "hint1 point must be less than 20" do
     @location.hint1_points = 65
     assert_not @location.valid?
@@ -139,7 +139,7 @@ end
     @location.hint2_points = 0
     assert_not @location.valid?
   end
-  
+
   test "hint2 point must be less than 20" do
     @location.hint2_points = 65
     assert_not @location.valid?
@@ -150,7 +150,7 @@ end
     @location.image_file_size = 5.megabytes
     assert_not @location.valid?
   end
-  
+
   test "the image file size can be 0 mb" do
     @location.image_file_size = 0.megabytes
     assert @location.valid?
@@ -187,15 +187,3 @@ end
 
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
