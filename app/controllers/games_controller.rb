@@ -132,7 +132,7 @@ class GamesController < ApplicationController
       user_play = Play.find_by(user_id:current_user.id, game_id:game_id)
       location = Location.find(location_id)
       distance = location.distance_from([lat,lng])
-      if distance <=3
+      if distance <= 0.003
         game_history.discovered = true;
         game_history.save
 

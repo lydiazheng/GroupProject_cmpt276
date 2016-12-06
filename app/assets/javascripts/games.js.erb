@@ -96,7 +96,7 @@ $(document).ready(function() {
       var gameId = $button.data('gameid');
       var locationId = $button.data('locationid');
       var hintNumber = $button.data('hint');
-      var url = '/games/hint/' + gameId + '?lid=' + locationId +
+      var url = '/hint/' + gameId + '?lid=' + locationId +
       '&hnum=' + hintNumber;
       $.ajax({
           type: 'GET',
@@ -118,7 +118,7 @@ $(document).ready(function() {
       var findLocation = function(position) {
         var gameId = $button.data('gameid');
         var locationId = $button.data('locationid');
-        var url = '/games/discover/' + gameId + '?lid=' + locationId +
+        var url = '/discover/' + gameId + '?lid=' + locationId +
         '&lat=' + position.coords.latitude + '&lng=' + position.coords.longitude;
         $.ajax({
             type: 'GET',
