@@ -297,11 +297,14 @@ width: 50%;
 
 /* Profile Content */
 .profile-content {
+  h2 {
+    text-align: center;
+  }
+  text-align: left;
   padding: 20px;
   background: #fff;
   min-height: 460px;
   color:  #696969;  /* DimGrey */
-  font-size: 30px;
 }
 /*end of user show page*/
 

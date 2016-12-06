@@ -13,22 +13,22 @@
         <p><%= @game.title %></p>
       </div>
       <div class="col-sm-4">
-        <span class="glyphicon glyphicon-home"></span>
-        <h4>ADDRESS</h4>
-        <p><%= @game.address %></p>
-      </div>
-      <div class="col-sm-4">
         <span class="glyphicon glyphicon-time"></span>
         <h4>START DATE</h4>
         <p><%= @game.starts_at_date %></p>
+      </div>
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-time"></span>
+        <h4>START TIME</h4>
+        <p><%= @game.starts_at_time.strftime("%H:%M:%S") %></p>
       </div>
       </div>
     <br><br>
     <div class="row">
       <div class="col-sm-4">
-        <span class="glyphicon glyphicon-time"></span>
-        <h4>START TIME</h4>
-        <p><%= @game.starts_at_time %></p>
+        <span class="glyphicon glyphicon-map-marker"></span>
+        <h4>ADDRESS</h4>
+        <p><%= @game.address %></p>
       </div>
       <div class="col-sm-4">
         <span class="glyphicon glyphicon-leaf"></span>

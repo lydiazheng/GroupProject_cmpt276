@@ -30,14 +30,10 @@
                         <div class="profile-usermenu">
                             <ul class="nav">
                                 <li class="active">
-                                	<a href="#"><i class="glyphicon glyphicon-home"></i> Game Rank</a>
-                                </li>
-
-                                <li>
-                                	<a href="#"><i class="glyphicon glyphicon-ok"></i> Game History</a>
+                                	<a href="#"><i class="glyphicon glyphicon-home"></i> My Games </a>
                                 </li>
                                 <li><%= link_to edit_user_path(current_user) do %>
-                                <i class="glyphicon glyphicon-cog"></i> Settings
+                                <i class="glyphicon glyphicon-cog"></i> Edit Profile
                                 <% end %>
                               </li>
                             </ul>
@@ -51,7 +47,45 @@
 				<!-- Profile content -->
                 <div class="col-md-9">
                 <div class="profile-content text-center">
-                		<h2>Game Statements:<br></h2>
+                		<h2>My Games</h2>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <h3>Upcoming Games</h3>
+                        <% @upcoming_games.each do |ugame| %>
+                          <div class="highlight">
+                            <a href="/games/play/<%=ugame.id %>">
+                              <%=ugame.title %>
+                            </a>
+                            </br>
+                            Starts @ <%=get_game_start_datetime(ugame.id).strftime("%F %H:%M:%S") %>
+                          </div>
+                        <% end %>
+                      </div>
+                      <div class="col-md-4">
+                        <h3>Past Games</h3>
+                        <% @past_games.each do |pgame| %>
+                          <div class="highlight">
+                            <a href="/games/history/<%=pgame.id %>">
+                              <%=pgame.title %>
+                            </a>
+                            </br>
+                            Points Earned:<%=Play.find_by(user_id:current_user.id, game_id:pgame.id).points %>
+                          </div>
+                        <% end %>
+                      </div>
+                      <div class="col-md-4">
+                        <h3>Organized Games</h3>
+                        <% @organized_games.each do |ogame| %>
+                          <div class="highlight">
+                            <a href="/games/<%=ogame.id %>">
+                              <%=ogame.title %>
+                            </a>
+                            </br>
+                            Starts @ <%=get_game_end_datetime(ogame.id).strftime("%F %H:%M:%S") %>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
 
                     </div>
                 </div>
