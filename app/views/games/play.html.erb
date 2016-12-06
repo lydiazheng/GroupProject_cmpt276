@@ -110,7 +110,7 @@
             <div class="col-md-6">
               <div class="row show-grid">
                 <div class="col-md-12 show-grid">
-                  <%=location.description %>
+                  <%=location.description %> <b>(<%=location.points %> point(s))</b>
                 </div>
                 <% if !@locations_history[location.id][:discovered]%>
                   <div class="col-md-12 show-grid">

@@ -4,6 +4,16 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
+    @locations = Location.all
+  end
+
+  # GET /locations/1
+  def show
+    @location = Location.find(params[:id])
+  end
+
+  # GET /locations/nearby
+  def nearby
     if(params.has_key?(:lat) && params.has_key?(:lng) && params.has_key?(:distance))
       begin
         lat = Float(params[:lat])
@@ -16,20 +26,7 @@ class LocationsController < ApplicationController
     else
       @locations = Location.all
     end
-    respond_to do |format|
-      format.html
-      format.json { render json: @locations }
-    end
-  end
-
-  # GET /locations/1
-  def show
-    @location = Location.find(params[:id])
-  end
-
-  # GET /locations/nearby
-  def nearby
-    @location = Location.find(params[:id])
+    render json: @locations
   end
 
   # GET /locations/new

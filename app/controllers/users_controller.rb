@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include GamesHelper
   #prevent an user from editting other users' profile
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
@@ -36,6 +37,20 @@ class UsersController < ApplicationController
     elsif(params[:gid] && !(Play.find_by(:user_id => current_user.id, :game_id => params[:gid])))
       Play.create(:user_id => current_user.id, :game_id => params[:gid], :points => 0)
       redirect_to games_path
+    end
+
+    @organized_games = Game.where(organizer_id:current_user.id)
+
+    joined_plays = Play.where(user_id:current_user.id)
+    @upcoming_games = []
+    @past_games = []
+    joined_plays.each do |g|
+      game = Game.find(g.game_id)
+      if get_game_end_datetime(g.game_id) >= DateTime.now
+        @upcoming_games.push(game)
+      else
+        @past_games.push(game)
+      end
     end
   end
 

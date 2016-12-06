@@ -55,7 +55,7 @@ $(document).ready(function() {
     var lat = $('#game_latitude').val();
     var lng = $('#game_longitude').val();
     var dis = $('#distance').val();
-    var url = '/locations?lat=' + lat + '&lng=' + lng + '&distance=' + dis;
+    var url = '/nearby?lat=' + lat + '&lng=' + lng + '&distance=' + dis;
     $.ajax({
         type: 'GET',
         dataType: 'json',

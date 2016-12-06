@@ -20,7 +20,7 @@
         <td><%= game.title %></td>
         <td><%= game.address %></td>
         <td><%= game.starts_at_date %></td>
-        <td><%= game.starts_at_time %></td>
+        <td><%= game.starts_at_time.strftime("%H:%M:%S") %></td>
         <td><%= game.duration %></td>
         <td>
           <% if logged_in? && current_user.is_admin?  %>
