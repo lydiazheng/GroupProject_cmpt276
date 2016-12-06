@@ -8,7 +8,7 @@ class Game < ActiveRecord::Base
   has_many :plays, dependent: :delete_all
   has_many :users, through: :plays
 
-  has_many :game_histories
+  has_many :game_histories, dependent: :destroy
 
   reverse_geocoded_by :latitude, :longitude, :address => :address
 
