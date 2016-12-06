@@ -31,17 +31,12 @@
                         <div class="profile-usermenu">
                             <ul class="nav">
                                 <li><%= link_to  :action => :show, :id => @user.id  do %>
-                                <i class="glyphicon glyphicon-home"></i> Game Page</a>
-                                <% end %>
-                                </li>
-
-                                <li><%= link_to  :action => :history, :id => @user.id  do %>
-                                <i class="glyphicon glyphicon-ok"></i> Game History 
+                                <i class="glyphicon glyphicon-home"></i> My Games</a>
                                 <% end %>
                                 </li>
 
                                 <li  class="active"><%= link_to edit_user_path(current_user) do %>
-                                <i class="glyphicon glyphicon-cog"></i> Settings
+                                <i class="glyphicon glyphicon-cog"></i> Edit Profile
                                 <% end %>
                                 </li>
                             </ul>
