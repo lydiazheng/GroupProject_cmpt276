@@ -15,10 +15,10 @@ class Location < ActiveRecord::Base
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validates_attachment_size :image, :less_than => 4.megabytes
-  validates :image_file_name, presence: true
+  #validates :image_file_name, presence: true
   validates :latitude, presence: true, :numericality => true
   validates :longitude, presence: true, :numericality => true
-  validates :description, presence: true, length: { maximum: 64 }
+  validates :description, presence: true, length: { maximum: 1024 }
   validates :hint1, presence: true
   validates :hint1_points, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 20}
   validates :hint2, presence: true

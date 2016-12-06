@@ -16,6 +16,12 @@
 
   <tbody>
     <% @games.each do |game| %>
+
+    <!-- if the game is passed and the user is regular user, the passed game is hided  -->
+    <% if  logged_in? && get_game_start_datetime(game.id) < DateTime.now && current_user.id != game.organizer_id && !(current_user.is_admin?) %>
+
+    <% else %>
+
       <tr>
         <td><%= game.title %></td>
         <td><%= game.address %></td>
@@ -29,13 +35,17 @@
               <%= link_to 'Delete', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
 
 
+           <!--if the admin is not the game organizer, then he can join or leave the game -->
+           
+           <% if current_user.id != game.organizer_id && get_game_start_datetime(game.id) > DateTime.now%>
+             <% if (Play.find_by(:user_id => current_user.id, :game_id => game.id))%>
+             <%= link_to "leave Game", user_path(current_user, :gid => game.id, :leave => game.id), class: "btn btn-danger" %>
 
-          <% if (Play.find_by(:user_id => current_user.id, :game_id => game.id))%>
-        <%= link_to "leave Game", user_path(current_user, :gid => game.id, :leave => game.id), class: "btn btn-danger" %>
+             <% else %>
+             <%= link_to "Join Game", user_path(current_user, :gid => game.id), class: "btn btn-success" %>
+             <% end %>
+           <% end %>
 
-          <% else %>
-            <%= link_to "Join Game", user_path(current_user, :gid => game.id), class: "btn btn-success" %>
-          <% end %>
 
 
 
@@ -72,6 +82,7 @@
       </tr>
 
     <% end %>
+  <% end %>
   </tbody>
 </table>
 </div>
