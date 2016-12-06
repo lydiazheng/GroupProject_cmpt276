@@ -1,10 +1,21 @@
 <!-- Game not started yet -->
 <% if @game_start_datetime > DateTime.now %>
-  <h2> <%= @game.title %> </h2>
-  <p>
-    This game has not started yet. Please check again at
-    <b><%= @game_start_datetime.strftime("%F @ %H:%M:%S") %></b>
-  </p>
+  <div class="row">
+    <div class="col-md-6">
+    <h2> <%= @game.title %> </h2>
+    <p>
+      This game has not started yet. Please check again at
+      <b><%= @game_start_datetime.strftime("%F @ %H:%M:%S") %></b>
+    </p>
+  </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div id="start-clock"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- Game ended-->
 <% elsif @game_end_datetime < DateTime.now %>
@@ -23,7 +34,7 @@
     <div class="col-md-6">
       <div class="panel panel-default" style="border-color:crimson; color: crimson;">
         <div class="panel-body">
-          <div id="clock"></div>
+          <div id="game-clock"></div>
         </div>
       </div>
     </div>
@@ -81,7 +92,7 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-body">
-          <div id="clock"></div>
+          <div id="game-clock"></div>
         </div>
       </div>
     </div>
@@ -152,7 +163,14 @@
 
 <% end %>
 <script>
-$('#clock').countdown({
+$('#start-clock').countdown({
+  until:new Date("<%=@game_start_datetime.utc.strftime("%FT%H:%M:%S")%>"),
+  format: 'MS',
+  onExpiry: function() {
+    location.reload();
+  }
+})
+$('#game-clock').countdown({
   until:new Date("<%=@game_end_datetime.utc.strftime("%FT%H:%M:%S")%>"),
   format: 'MS',
   onExpiry: function() {
