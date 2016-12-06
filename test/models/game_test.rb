@@ -5,9 +5,11 @@ class GameTest < ActiveSupport::TestCase
   #   assert true
   # end
   def setup
+    @location = locations(:SFU_library)
     @game = games(:SFU_library)
     @game.starts_at_time = 12-06-00
     @game.starts_at_date = 2016-12-05
+    @game.locations = [@location]
   end
 
   test "the game should be valid" do
@@ -19,7 +21,7 @@ class GameTest < ActiveSupport::TestCase
     assert_not @game.valid?
   end
 
-  test "the longitude must be only in integer" do
+  test "the longitude must be only number" do
     valid_longitudes = [
       "aaaa",
       "aaAA",
@@ -27,16 +29,16 @@ class GameTest < ActiveSupport::TestCase
       "!!112"]
     valid_longitudes.each do |valid_longitude|
      @game.longitude = valid_longitude
-     assert_not @game.valid?, "#{valid_longitude.inspect} should be valid"
+     assert_not @game.valid?, "#{valid_longitude.inspect} should be invalid"
    end
  end
-  
+
   test "the latitude cannot be absent" do
     @game.latitude = "     "
     assert_not @game.valid?
    end
 
-  test "the latitude must be only in integer" do
+  test "the latitude must be only number" do
     valid_latitudes = [
       "aaaa",
       "aaAA",
@@ -44,7 +46,7 @@ class GameTest < ActiveSupport::TestCase
       "!!112"]
     valid_latitudes.each do |valid_latitude|
      @game.latitude = valid_latitude
-     assert_not @game.valid?, "#{valid_latitude.inspect} should be valid"
+     assert_not @game.valid?, "#{valid_latitude.inspect} should be invalid"
    end
  end
 
@@ -60,18 +62,6 @@ class GameTest < ActiveSupport::TestCase
     assert_not @game.valid?
   end
 
-  test "the title cannot be a combination of numebr, letter(uppercase or lowercase) and symbol" do
-  valid_titles = [
-    "asdfsd",
-    "12 sdf",
-    "12"]
-  valid_titles.each do |valid_title|
-    @game.title = valid_title
-    assert_not @game.valid?, "#{valid_title.inspect} should be valid"
-  end
-end
-
-
   test "the duration must be integer" do
   valid_durations = [
     "abcdff",
@@ -81,10 +71,9 @@ end
     "+-*/ ASD dfsc"]
   valid_durations.each do |valid_duration|
     @game.duration = valid_duration
-    assert_not @game.valid?, "#{valid_duration.inspect} should be valid"
+    assert_not @game.valid?, "#{valid_duration.inspect} should be invalid"
   end
 end
-
 
   test "duration should be larger than 5 miniutes" do
     @game.duration = 4
