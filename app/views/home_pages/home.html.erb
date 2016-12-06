@@ -10,5 +10,7 @@
          <div class="mover-2"></div>
   </div><br>
   <br>
-  <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary btn-lg" %>
+  <% if !logged_in? %>
+    <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary btn-lg" %>
+  <% end %>
 </div>
