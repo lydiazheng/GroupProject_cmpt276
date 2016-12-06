@@ -46,7 +46,7 @@
               </td>
               <td>
                 <% if history.hint2_used%>
-                  Yes (- <%=@location.hint2_points %>)
+                  Yes -<%=@location.hint2_points %> points(s)
                   <% @point_count = @point_count - @location.hint2_points %>
                 <% else %>
                   No
