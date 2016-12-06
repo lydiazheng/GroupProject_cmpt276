@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 20161201174133) do
     t.datetime "updated_at",     null: false
   end
 
+  add_index "games", ["organizer_id"], name: "index_games_on_organizer_id", using: :btree
+
   create_table "hunts", id: false, force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "location_id"
@@ -109,6 +111,7 @@ ActiveRecord::Schema.define(version: 20161201174133) do
   add_foreign_key "game_histories", "games"
   add_foreign_key "game_histories", "locations"
   add_foreign_key "game_histories", "users"
+  add_foreign_key "games", "users", column: "organizer_id"
   add_foreign_key "hunts", "games"
   add_foreign_key "hunts", "locations"
   add_foreign_key "plays", "games"
