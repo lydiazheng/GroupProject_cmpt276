@@ -48,22 +48,24 @@
 
     <br>
     <br>
-    <% if (Play.find_by(:user_id => current_user.id, :game_id => @game.id))%>
+    <% if @game.organizer_id != current_user.id %>
+      <% if (Play.find_by(:user_id => current_user.id, :game_id => @game.id))%>
         <%= link_to "leave Game", user_path(current_user, :gid => @game.id, :leave => @game.id), class: "btn btn-danger" %>
 
-    <% else %>
+      <% else %>
         <%= link_to "Join Game", user_path(current_user, :gid => @game.id), class: "btn btn-success" %>
-
-
-
-   <% end %>
+      <% end %>
+    <% end %>
 
 
   </div>
   <br>
   <div lass="button-game-show">
-    <% if logged_in? && current_user.is_admin? || current_user.id == @game.organizer_id %>
+    <% if logged_in? && current_user.is_admin? %>
       <%= link_to 'Edit', edit_game_path(@game), class: 'btn btn-info' %> |
+    <% elsif  logged_in? && current_user.id == @game.organizer_id && get_game_start_datetime(@game.id) > DateTime.now%>
+      <%= link_to 'Edit', edit_game_path(@game), class: 'btn btn-info' %> |
+    <% else %>
     <% end %>
     <%= link_to 'Back', games_path, class: 'btn btn-warning' %>
 

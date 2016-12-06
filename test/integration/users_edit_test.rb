@@ -6,10 +6,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user = users(:john)
   end
 
-  # Log in as a particular user.
-  def log_in_as(user)
-    session[:user_id] = user.id
-  end
+
 
 
   test "should redirect edit when not logged in" do
