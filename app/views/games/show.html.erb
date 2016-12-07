@@ -40,7 +40,7 @@
         <h4>ORGANIZER</h4>
         <% if @game.organizer.present? %>
         <p>
-          <%= link_to @game.organizer.username, @game.organizer %>
+          <%= @game.organizer.username %>
         </p>
       <% end %>
       </div>
