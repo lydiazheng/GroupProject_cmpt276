@@ -18,7 +18,7 @@
     <% @games.each do |game| %>
 
     <!-- if the game is passed and the user is regular user, the passed game is hided  -->
-    <% if  logged_in? && get_game_end_datetime(game.id) < DateTime.now && current_user.id != game.organizer_id && !(current_user.is_admin?) %>
+    <% if  logged_in? && get_game_end_datetime(game.id) < DateTime.now && !(current_user.is_admin?) %>
 
     <% else %>
 
@@ -59,6 +59,10 @@
               <%= link_to 'Show', game, class: 'btn btn-info' %>
               <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-info' %>
               <%= link_to 'Delete', game, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+              <!-- elsif the user is game organizer and the game is not passed, the user
+              can see the game show page -->
+            <% elsif logged_in? && get_game_end_datetime(game.id) > DateTime.now && current_user.id == game.organizer_id %>
+              <%= link_to 'Show', game, class: 'btn btn-info' %>
               <!-- elsif the user is not game organizer and the game is not passed, the user
           can see the game show page and join or leave the game page  -->
               <% elsif logged_in? && get_game_end_datetime(game.id) > DateTime.now && current_user.id != game.organizer_id %>

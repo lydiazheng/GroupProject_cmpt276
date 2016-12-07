@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   resources :games
-  get  '/play/:id', to: 'games#play'
-  get  '/start/:id', to: 'games#start'
-  get  '/hint/:id', to:'games#hint'
-  get  '/discover/:id', to:'games#discover'
-  get  '/history/:id', to:'games#history'
+  get  'play/:id', to: 'games#play'
+  get  'start/:id', to: 'games#start'
+  get  'hint/:id', to:'games#hint'
+  get  'discover/:id', to:'games#discover'
+  get  'history/:id', to:'games#history'
 
   get 'nearby', to:'locations#nearby'
 
